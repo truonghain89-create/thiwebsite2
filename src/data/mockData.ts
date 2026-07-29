@@ -1063,7 +1063,7 @@ export const resorts: Resort[] = [
       vi: "Tọa lạc tại Bãi Dài hoang sơ, mang đến hồ bơi ngoài trời rộng lớn, dịch vụ spa cao cấp và phòng nghỉ sang trọng hài hòa với thiên nhiên.",
       en: "Located on pristine Bai Dai Beach, featuring a massive outdoor pool, luxury spa, and premium rooms in harmony with nature."
     },
-    image: "/public/images/phuquoc.png",
+    image: "/images/phuquoc.png",
     rating: 4.8,
     location: { vi: "Phú Quốc, Kiên Giang", en: "Phu Quoc, Kien Giang" },
     amenities: [
@@ -1082,7 +1082,7 @@ export const resorts: Resort[] = [
       vi: "Khu nghỉ dưỡng sinh thái độc đáo nằm ẩn mình giữa thung lũng Mường Hoa hoang sơ với hồ bơi vô cực nước nóng ngắm ruộng bậc thang tuyệt đẹp.",
       en: "A unique eco-resort nestled in pristine Muong Hoa valley with a heated infinity pool overlooking breathtaking terraced fields."
     },
-    image: "/public/images/sapa.png",
+    image: "/images/sapa.png",
     rating: 4.9,
     location: { vi: "Sa Pa, Lào Cai", en: "Sapa, Lao Cai" },
     amenities: [
@@ -1100,7 +1100,7 @@ export const resorts: Resort[] = [
       vi: "Khu nghỉ dưỡng bờ biển đẳng cấp quốc tế tại Hội An, giao hòa giữa kiến trúc truyền thống tinh tế và dịch vụ nghỉ dưỡng thượng lưu bậc nhất.",
       en: "World-class beachfront resort in Hoi An, blending traditional architecture with ultimate luxury services."
     },
-    image: "/public/images/hoian.png",
+    image: "/images/hoian.png",
     rating: 5.0,
     location: { vi: "Điện Bàn, Quảng Nam", en: "Dien Ban, Qnam" },
     amenities: [
@@ -1131,7 +1131,7 @@ export const blogs: Blog[] = [
   {
     id: "hanoi-street-food",
     title: { vi: "Top 10 món ăn đường phố phải thử tại Hà Nội", en: "Top 10 Street Foods to Try in Hanoi" },
-    image: "/public/images/hoian-cooking.png",
+    image: "/images/hoian-cooking.png",
     readTime: "5 mins read",
     date: "15 Tháng 12, 2024",
     author: "Thu Huong",
@@ -1147,7 +1147,7 @@ export const blogs: Blog[] = [
   {
     id: "ma-pi-leng-pass",
     title: { vi: "Cẩm nang chinh phục đèo Mã Pì Lèng an toàn", en: "Guide to Safely Conquering Ma Pi Leng Pass" },
-    image: "/public/images/hagiang.png",
+    image: "/images/hagiang.png",
     readTime: "7 mins read",
     date: "10 Tháng 12, 2024",
     author: "Hoang Nam",
