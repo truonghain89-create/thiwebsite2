@@ -447,56 +447,50 @@ export interface RegionalTour {
 export const regionalTours: RegionalTour[] = [
   {
     id: "north",
-    region: { vi: "Miền Bắc", en: "Northern Vietnam" },
+    region: { vi: "Miền Bắc", en: "Northern" },
     description: {
-      vi: "Núi non hùng vĩ, ruộng bậc thang xanh ngắt, văn hóa dân tộc đa dạng và ẩm thực phong phú.",
-      en: "Majestic mountains, lush terraced rice fields, diverse ethnic cultures and rich cuisine."
+      vi: "Núi non hùng vĩ, ruộng bậc thang xanh ngắt, văn hóa dân tộc đa dạng và ẩm thực phong phú mang đậm nét văn hiến Kinh kỳ.",
+      en: "Majestic mountains, green terraced fields, diverse ethnic cultures, and delicious cuisine from the heart of Hanoi."
     },
-    image: "https://images.unsplash.com/photo-1570366583862-f91883984fde?auto=format&fit=crop&w=800&q=80",
+    image: "/images/sapa.png",
     tourCount: 156,
     destinations: [
       { vi: "Hà Nội", en: "Hanoi" },
       { vi: "Vịnh Hạ Long", en: "Ha Long Bay" },
       { vi: "Sa Pa", en: "Sapa" },
       { vi: "Hà Giang", en: "Ha Giang" },
-      { vi: "Ninh Bình", en: "Ninh Binh" },
-      { vi: "Mộc Châu", en: "Moc Chau" },
     ],
   },
   {
     id: "central",
-    region: { vi: "Miền Trung", en: "Central Vietnam" },
+    region: { vi: "Miền Trung", en: "Central" },
     description: {
-      vi: "Di sản văn hóa thế giới, bãi biển tuyệt đẹp, ẩm thực tinh tế và con người thân thiện.",
-      en: "World cultural heritage, stunning beaches, refined cuisine and friendly people."
+      vi: "Di sản thế giới cổ kính, bãi biển dài thơ mộng, ẩm thực Cố đô tinh tế cùng sự đôn hậu, chân thành của con người miền Trung.",
+      en: "Ancient world heritage, romantic long coastlines, refined imperial cuisine, and the warm, humble hospitality of local people."
     },
-    image: "https://images.unsplash.com/photo-1559592413-7cec4d0cae2b?auto=format&fit=crop&w=800&q=80",
+    image: "/images/hoian.png",
     tourCount: 189,
     destinations: [
       { vi: "Đà Nẵng", en: "Da Nang" },
       { vi: "Hội An", en: "Hoi An" },
       { vi: "Huế", en: "Hue" },
-      { vi: "Đà Lạt", en: "Da Lat" },
-      { vi: "Quy Nhơn", en: "Quy Nhon" },
       { vi: "Nha Trang", en: "Nha Trang" },
     ],
   },
   {
     id: "south",
-    region: { vi: "Miền Nam", en: "Southern Vietnam" },
+    region: { vi: "Miền Nam", en: "Southern" },
     description: {
-      vi: "Sông nước miệt vườn, đảo ngọc thiên đường, đô thị sôi động và ẩm thực đường phố đa dạng.",
-      en: "River waterways and orchards, paradise islands, vibrant cities and diverse street food."
+      vi: "Sông nước miệt vườn thanh bình, nhịp sống sầm uất hiện đại, chợ nổi Cái Răng tấp nập kết hợp cùng thiên đường nghỉ dưỡng biển ấm Phú Quốc.",
+      en: "Peaceful orchards, bustling modern life, crowded floating markets, combined with the warm beach resort paradise of Phu Quoc."
     },
-    image: "https://images.unsplash.com/photo-1557750255-c76072572da4?auto=format&fit=crop&w=800&q=80",
+    image: "/images/phuquoc.png",
     tourCount: 134,
     destinations: [
       { vi: "TP. Hồ Chí Minh", en: "Ho Chi Minh City" },
       { vi: "Phú Quốc", en: "Phu Quoc" },
       { vi: "Cần Thơ", en: "Can Tho" },
       { vi: "Côn Đảo", en: "Con Dao" },
-      { vi: "Mũi Né", en: "Mui Ne" },
-      { vi: "Vũng Tàu", en: "Vung Tau" },
     ],
   },
 ];

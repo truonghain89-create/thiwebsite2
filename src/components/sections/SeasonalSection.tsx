@@ -11,7 +11,8 @@ export function SeasonalSection() {
       period: "Tháng 2 - 4",
       image: "/images/mocchau-spring.png",
       desc: { vi: "Mộc Châu ngập tràn hoa mận trắng rực rỡ sắc màu Tây Bắc.", en: "Moc Chau blooms with white plum blossoms across the Northwest." },
-      color: "bg-pink-500",
+      color: "bg-pink-rose",
+      hoverBorder: "hover:border-pink-rose/30",
       textColor: "text-pink-300",
       price: 4200000,
       num: "01",
@@ -21,7 +22,8 @@ export function SeasonalSection() {
       period: "Tháng 5 - 7",
       image: "/images/phuquoc.png",
       desc: { vi: "Làn nước mát lạnh ngập tràn nắng biển ấm tại đảo Phú Quốc.", en: "Cool waters and warm sunshine on Phu Quoc island." },
-      color: "bg-sky-500",
+      color: "bg-sky-blue",
+      hoverBorder: "hover:border-sky-blue/30",
       textColor: "text-sky-300",
       price: 4900000,
       num: "02",
@@ -31,7 +33,8 @@ export function SeasonalSection() {
       period: "Tháng 8 - 10",
       image: "/images/sapa.png",
       desc: { vi: "Ruộng bậc thang óng ả màu lúa chín ngập thung lũng Sa Pa.", en: "Golden terraced rice fields fill the Sapa valleys." },
-      color: "bg-amber-500",
+      color: "bg-amber-gold",
+      hoverBorder: "hover:border-amber-gold/30",
       textColor: "text-amber-300",
       price: 4600000,
       num: "03",
@@ -41,7 +44,8 @@ export function SeasonalSection() {
       period: "Tháng 11 - 1",
       image: "/images/dalat-winter.png",
       desc: { vi: "Đà Lạt bảng lảng sương mù giăng kín các lối nhỏ đồi thông.", en: "Da Lat shrouded in misty fog over pine-covered hills." },
-      color: "bg-indigo-500",
+      color: "bg-purple-indigo",
+      hoverBorder: "hover:border-purple-indigo/30",
       textColor: "text-indigo-300",
       price: 3900000,
       num: "04",
@@ -65,7 +69,7 @@ export function SeasonalSection() {
             <div
               key={season.num}
               onClick={() => openBookingModal(`${lang === "vi" ? "Du lịch" : "Travel"} ${season.name[lang]}`, season.price)}
-              className="group relative h-[420px] rounded-[32px] overflow-hidden cursor-pointer shadow-card hover:-translate-y-2 hover:shadow-hover border border-transparent transition-all duration-700"
+              className={`group relative h-[420px] rounded-[32px] overflow-hidden cursor-pointer shadow-card hover:-translate-y-2 hover:shadow-hover border border-transparent transition-all duration-700 ${season.hoverBorder}`}
             >
               <img src={season.image} alt={season.name[lang]} className="absolute inset-0 w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" />
               <div className="absolute inset-0 bg-gradient-to-t from-black/85 via-black/25 to-transparent" />

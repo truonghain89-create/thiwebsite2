@@ -11,7 +11,7 @@ const tours = [
     region: "north" as const,
     image: "/images/halong.png",
     badge: { vi: "Bán chạy", en: "Best Seller" },
-    badgeColor: "bg-primary",
+    badgeColor: "bg-coral-rose",
     name: { vi: "Du thuyền Vịnh Hạ Long 3N2Đ", en: "Ha Long Bay Cruise 3D2N" },
     rating: 4.9,
     reviews: 1248,
@@ -26,7 +26,7 @@ const tours = [
     region: "north" as const,
     image: "/images/sapa.png",
     badge: { vi: "Hot", en: "Hot" },
-    badgeColor: "bg-rose-500",
+    badgeColor: "bg-sky-blue",
     name: { vi: "Trekking Sa Pa – Fansipan 4N3Đ", en: "Sapa Fansipan Trek 4D3N" },
     rating: 4.8,
     reviews: 896,
@@ -40,9 +40,9 @@ const tours = [
     id: "hoian-heritage",
     region: "central" as const,
     image: "/images/hoian.png",
-    badge: null,
-    badgeColor: "",
-    name: { vi: "Hành trình Di sản Hội An – Huế 5N4Đ", en: "Hoi An Heritage Tour 5D4N" },
+    badge: { vi: "Bán chạy", en: "Best Seller" },
+    badgeColor: "bg-coral-rose",
+    name: { vi: "Hành trình Di sản Miền Trung 5N4Đ", en: "Central Heritage Tour 5D4N" },
     rating: 4.7,
     reviews: 534,
     duration: { vi: "5 ngày", en: "5 days" },
@@ -55,15 +55,15 @@ const tours = [
     id: "phuquoc-resort",
     region: "south" as const,
     image: "/images/phuquoc.png",
-    badge: { vi: "Mới", en: "New" },
-    badgeColor: "bg-amber-500",
-    name: { vi: "Thiên đường Phú Quốc 4N3Đ", en: "Phu Quoc Paradise 4D3N" },
+    badge: { vi: "Hot", en: "Hot" },
+    badgeColor: "bg-sky-blue",
+    name: { vi: "Nghỉ dưỡng biển đảo Phú Quốc 4N3Đ", en: "Phu Quoc Beach Resort 4D3N" },
     rating: 4.9,
     reviews: 672,
     duration: { vi: "4 ngày", en: "4 days" },
-    guests: { vi: "Cặp đôi", en: "Couples" },
+    guests: { vi: "Nhóm", en: "Group" },
     difficulty: { vi: "Dễ", en: "Easy" },
-    price: 7490000,
+    price: 4890000,
     includes: ["Resort 5 sao", "Ăn sáng", "Lặn biển"],
   },
 ];
@@ -156,15 +156,15 @@ export function ToursSection() {
                     <span key={inc} className="px-2 py-0.5 rounded-full bg-primary/5 text-primary text-[10px] font-semibold">{inc}</span>
                   ))}
                 </div>
-                <div className="flex items-center justify-between pt-3 mt-auto border-t border-[#E5E7EB]">
-                  <div>
+                <div className="flex items-end justify-between pt-3 mt-auto border-t border-[#E5E7EB] gap-2">
+                  <div className="flex flex-col min-w-0">
                     <span className="text-[10px] text-text-light uppercase font-semibold">{lang === "vi" ? "Từ" : "From"}</span>
-                    <div className="font-heading font-extrabold text-lg text-primary">{formatPrice(tour.price)}</div>
+                    <div className="font-heading font-extrabold text-lg text-primary truncate">{formatPrice(tour.price)}</div>
                     <span className="text-[10px] text-text-light">/{lang === "vi" ? "người" : "person"}</span>
                   </div>
                   <button
                     onClick={() => openBookingModal(tour.name[lang], tour.price)}
-                    className="px-4 py-2 rounded-full bg-primary text-white text-xs font-bold uppercase tracking-widest hover:bg-primary-dark transition-all shadow-md"
+                    className="shrink-0 whitespace-nowrap px-3 py-1.5 rounded-full bg-primary text-white text-[10px] sm:text-xs font-bold uppercase tracking-widest hover:bg-primary-dark transition-all duration-300 shadow-md"
                   >
                     {t("ui.bookNow")}
                   </button>

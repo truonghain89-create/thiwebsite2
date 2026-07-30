@@ -57,13 +57,8 @@ export function Footer() {
         {/* Brand */}
         <div className="flex flex-col gap-4 text-left md:col-span-1">
           <div className="flex items-center gap-3">
-            <div className="w-14 h-14 rounded-full bg-white flex items-center justify-center shadow-md overflow-hidden border-2 border-white/20 select-none shrink-0">
-              {/* School-style logo placeholder */}
-              <svg width="36" height="36" viewBox="0 0 36 36" fill="none">
-                <circle cx="18" cy="18" r="16" fill="#2E8B57" opacity="0.12"/>
-                <path d="M18 8l10 5-10 5L8 13l10-5z" fill="#2E8B57"/>
-                <path d="M8 13v8l10 5 10-5v-8" stroke="#2E8B57" strokeWidth="1.5" fill="none"/>
-              </svg>
+            <div className="w-14 h-14 rounded-full bg-white flex items-center justify-center shadow-md shadow-primary/10 overflow-hidden border-2 border-white/20 select-none shrink-0">
+              <img src="/logo-school.png" alt="Trường THPT Tam Hiệp Logo" className="w-full h-full object-contain p-0.5" />
             </div>
             <div className="flex flex-col text-white">
               <span className="font-heading font-black text-lg leading-tight tracking-tight uppercase">

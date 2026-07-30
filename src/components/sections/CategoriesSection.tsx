@@ -38,6 +38,13 @@ export function CategoriesSection() {
     "utensils-crossed": <svg className="w-7 h-7" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2"><path strokeLinecap="round" strokeLinejoin="round" d="M8 3v12m0 0l-2-2m2 2l2-2M6 17v4m5-10V3m0 0l3 3-3 3"/></svg>,
   };
 
+  const bgClasses: Record<string, string> = {
+    "sky-50": "bg-sky-50",
+    "emerald-50": "bg-emerald-50",
+    "amber-50": "bg-amber-50",
+    "rose-50": "bg-rose-50",
+  };
+
   const colorClasses: Record<string, string> = {
     skyBlue: "text-sky-500",
     primary: "text-primary",
@@ -81,7 +88,7 @@ export function CategoriesSection() {
             <div key={cat.key}
               className={`group p-8 rounded-[32px] bg-white border border-[#E5E7EB] shadow-card hover:-translate-y-2 hover:shadow-hover transition-all duration-500 text-center cursor-pointer card-shimmer`}
             >
-              <div className={`w-16 h-16 rounded-[24px] bg-${cat.bg} ${colorClasses[cat.color]} flex items-center justify-center mx-auto mb-6 group-hover:scale-110 group-hover:text-white transition-all duration-500 ${hoverClasses[cat.hover]}`}>
+              <div className={`w-16 h-16 rounded-[24px] ${bgClasses[cat.bg]} ${colorClasses[cat.color]} flex items-center justify-center mx-auto mb-6 group-hover:scale-110 group-hover:text-white transition-all duration-500 ${hoverClasses[cat.hover]}`}>
                 {icons[cat.icon]}
               </div>
               <h3 className="font-heading font-extrabold text-base text-text mb-1">{cat.label}</h3>
