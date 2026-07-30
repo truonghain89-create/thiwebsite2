@@ -1,18 +1,41 @@
 "use client";
 
+import { useState, useEffect } from "react";
 import { useApp } from "@/context/AppContext";
 
 export function HeroSection() {
   const { t, lang, openBookingModal } = useApp();
+  const [slideIndex, setSlideIndex] = useState(0);
+  const [fade, setFade] = useState(true);
+
+  const slides = [
+    "/images/vietnam-hero.png",
+    "/images/hoian.png",
+    "/images/sapa.png"
+  ];
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setFade(false);
+      setTimeout(() => {
+        setSlideIndex((prev) => (prev + 1) % slides.length);
+        setFade(true);
+      }, 500);
+    }, 7000);
+
+    return () => clearInterval(interval);
+  }, []);
 
   return (
     <section id="hero" className="relative min-h-screen flex flex-col items-center justify-center pt-24 pb-10 overflow-hidden">
       {/* Background */}
       <div className="absolute inset-0 z-0">
         <img
-          src="/images/vietnam-hero.png"
+          src={slides[slideIndex]}
           alt="Vietnam Background"
-          className="w-full h-full object-cover scale-105"
+          className={`w-full h-full object-cover scale-105 transition-all duration-1000 ${
+            fade ? "opacity-100" : "opacity-20"
+          }`}
         />
         <div className="absolute inset-0 bg-gradient-to-b from-black/60 via-black/35 to-black/70 z-[1]" />
         <div className="absolute bottom-0 left-0 right-0 h-48 z-[1] bg-gradient-to-t from-[#F8FCF9] via-[#F8FCF9]/70 to-transparent" />
