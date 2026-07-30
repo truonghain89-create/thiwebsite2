@@ -1,0 +1,1629 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Vietnam Tours — Premium Travel Experience</title>
+  
+  <!-- Tailwind CSS Play CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            primary: '#2E8B57',
+            'primary-dark': '#1e5e3a',
+            'primary-light': '#43b374',
+            secondary: '#3CB371',
+            accent: '#66CDAA',
+            bg: '#F8FCF9',
+            'bg-alt': '#F0F7F2',
+            text: '#1F2937',
+            'text-secondary': '#4B5563',
+            'text-light': '#9CA3AF',
+            'bg-dark': '#0B1A12',
+            'bg-dark-card': '#12261B',
+            'border-light': '#E5E7EB',
+            // Custom vibrant accent colors
+            amberGold: '#F59E0B',
+            coralRose: '#FF6B6B',
+            skyBlue: '#0ea5e9',
+            pinkRose: '#ec4899',
+            purpleIndigo: '#6366f1',
+          },
+          fontFamily: {
+            heading: ['Manrope', 'sans-serif'],
+            body: ['Inter', 'sans-serif'],
+          },
+          boxShadow: {
+            soft: '0 20px 50px rgba(46, 139, 87, 0.05)',
+            hover: '0 30px 60px rgba(46, 139, 87, 0.12)',
+            card: '0 10px 30px rgba(0, 0, 0, 0.02)',
+            glow: '0 0 50px rgba(60, 179, 113, 0.18)',
+          },
+          borderRadius: {
+            card: '32px',
+            button: '999px',
+          }
+        }
+      }
+    }
+  </script>
+
+  <!-- Google Fonts (Manrope & Inter) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Manrope:wght@600;700;800&display=swap" rel="stylesheet">
+
+  <!-- AOS (Animate on Scroll) -->
+  <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+  <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+
+  <!-- Lucide Icons CDN -->
+  <script src="https://unpkg.com/lucide@latest"></script>
+
+  <link rel="stylesheet" href="style.css">
+</head>
+<body class="antialiased">
+
+  <!-- Scroll Progress Bar -->
+  <div id="scroll-progress" class="fixed top-0 left-0 h-[4px] gradient-primary z-50 transition-all duration-100" style="width: 0%"></div>
+
+  <!-- Sticky Header -->
+  <header id="main-header" class="fixed top-0 left-0 right-0 z-40 transition-all duration-500 py-5 bg-transparent">
+    <div class="max-w-[1480px] mx-auto px-6 flex items-center justify-between relative">
+      <!-- Logo -->
+      <a href="#" class="flex items-center gap-3.5 group shrink-0">
+        <div class="relative flex items-center justify-center transition-transform duration-500 group-hover:scale-110 group-hover:-translate-y-0.5 select-none text-white drop-shadow-md" id="header-logo-icon">
+          <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M17.8 19.2 16 11l3.5-3.5C21 6 21.5 4 21 3c-1-.5-3 0-4.5 1.5L13 8 4.8 6.2c-.5-.1-.9.2-1.1.6L3 8l7 4-3.5 3.5-2.2-.6-1.1 1.2 3.4 1.2 1.2 3.4 1.2-1.1-.6-2.2L12 14l4 7c.4-.2.7-.6.6-1.1z" />
+          </svg>
+        </div>
+        <div class="flex flex-col text-white transition-colors duration-300" id="header-logo-text">
+          <span class="font-heading font-black text-xl md:text-[22px] leading-none tracking-tight">Vietnam<span class="text-primary-light" id="logo-tours-text">Tours</span><span class="text-amberGold">.</span></span>
+          <span class="text-[8px] md:text-[9px] font-bold tracking-[0.25em] uppercase opacity-75 mt-1" data-translate="nav.slogan">Premium Travel</span>
+        </div>
+      </a>
+
+      <!-- Desktop Navigation Menu -->
+      <nav class="hidden lg:flex items-center gap-0.5 px-2 py-1.5 rounded-full border border-white/10 glass">
+        <a href="#hero" class="menu-item px-3 py-1.5 text-xs font-bold uppercase tracking-wider rounded-full text-white hover:bg-white/10 transition-all" data-translate="nav.home">Trang chủ</a>
+        
+        <!-- Mega Menu for Destinations -->
+        <div class="relative">
+          <button id="mega-btn" class="menu-item flex items-center gap-1 px-3 py-1.5 text-xs font-bold uppercase tracking-wider rounded-full text-white hover:bg-white/10 transition-all">
+            <span data-translate="nav.destinations">Điểm đến</span>
+            <i id="mega-chevron" data-lucide="chevron-down" class="w-3.5 h-3.5 transition-transform duration-300"></i>
+          </button>
+          <div id="mega-menu" class="absolute top-full left-1/2 -translate-x-1/2 mt-3 w-[720px] glass-strong rounded-[32px] shadow-hover p-8 opacity-0 pointer-events-none transition-all duration-500 transform translate-y-2">
+            <div class="grid grid-cols-3 gap-8 text-left text-text">
+              <div>
+                <h4 class="font-heading font-bold text-xs text-primary uppercase tracking-widest mb-4 border-b border-primary/10 pb-2" data-translate="regional.north">Miền Bắc</h4>
+                <div class="flex flex-col gap-2.5">
+                  <a href="#destinations" onclick="switchRegion('north', document.querySelectorAll('.region-tab')[0])" class="text-sm font-semibold hover:text-primary transition-colors flex items-center gap-2"><i data-lucide="map-pin" class="w-3.5 h-3.5 text-primary"></i> Vịnh Hạ Long</a>
+                  <a href="#destinations" onclick="switchRegion('north', document.querySelectorAll('.region-tab')[0])" class="text-sm font-semibold hover:text-primary transition-colors flex items-center gap-2"><i data-lucide="map-pin" class="w-3.5 h-3.5 text-primary"></i> Sa Pa</a>
+                  <a href="#destinations" onclick="switchRegion('north', document.querySelectorAll('.region-tab')[0])" class="text-sm font-semibold hover:text-primary transition-colors flex items-center gap-2"><i data-lucide="map-pin" class="w-3.5 h-3.5 text-primary"></i> Hà Giang</a>
+                </div>
+              </div>
+              <div>
+                <h4 class="font-heading font-bold text-xs text-primary uppercase tracking-widest mb-4 border-b border-primary/10 pb-2" data-translate="regional.central">Miền Trung</h4>
+                <div class="flex flex-col gap-2.5">
+                  <a href="#destinations" onclick="switchRegion('central', document.querySelectorAll('.region-tab')[1])" class="text-sm font-semibold hover:text-primary transition-colors flex items-center gap-2"><i data-lucide="map-pin" class="w-3.5 h-3.5 text-primary"></i> Đà Nẵng</a>
+                  <a href="#destinations" onclick="switchRegion('central', document.querySelectorAll('.region-tab')[1])" class="text-sm font-semibold hover:text-primary transition-colors flex items-center gap-2"><i data-lucide="map-pin" class="w-3.5 h-3.5 text-primary"></i> Hội An</a>
+                  <a href="#destinations" onclick="switchRegion('central', document.querySelectorAll('.region-tab')[1])" class="text-sm font-semibold hover:text-primary transition-colors flex items-center gap-2"><i data-lucide="map-pin" class="w-3.5 h-3.5 text-primary"></i> Huế</a>
+                </div>
+              </div>
+              <div>
+                <h4 class="font-heading font-bold text-xs text-primary uppercase tracking-widest mb-4 border-b border-primary/10 pb-2" data-translate="regional.south">Miền Nam</h4>
+                <div class="flex flex-col gap-2.5">
+                  <a href="#destinations" onclick="switchRegion('south', document.querySelectorAll('.region-tab')[2])" class="text-sm font-semibold hover:text-primary transition-colors flex items-center gap-2"><i data-lucide="map-pin" class="w-3.5 h-3.5 text-primary"></i> Phú Quốc</a>
+                  <a href="#destinations" onclick="switchRegion('south', document.querySelectorAll('.region-tab')[2])" class="text-sm font-semibold hover:text-primary transition-colors flex items-center gap-2"><i data-lucide="map-pin" class="w-3.5 h-3.5 text-primary"></i> Côn Đảo</a>
+                  <a href="#destinations" onclick="switchRegion('south', document.querySelectorAll('.region-tab')[2])" class="text-sm font-semibold hover:text-primary transition-colors flex items-center gap-2"><i data-lucide="map-pin" class="w-3.5 h-3.5 text-primary"></i> Cần Thơ</a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <a href="#tours" class="menu-item px-3 py-1.5 text-xs font-bold uppercase tracking-wider rounded-full text-white hover:bg-white/10 transition-all" data-translate="nav.tours">Tour</a>
+        <a href="#combo" class="menu-item px-3 py-1.5 text-xs font-bold uppercase tracking-wider rounded-full text-white hover:bg-white/10 transition-all" data-translate="nav.combo">Combo</a>
+        <a href="#blog" class="menu-item px-3 py-1.5 text-xs font-bold uppercase tracking-wider rounded-full text-white hover:bg-white/10 transition-all" data-translate="nav.blog">Cẩm nang</a>
+        <a href="#cta" class="menu-item px-3 py-1.5 text-xs font-bold uppercase tracking-wider rounded-full text-white hover:bg-white/10 transition-all" data-translate="nav.contact">Liên hệ</a>
+      </nav>
+
+      <!-- Right Buttons -->
+      <div class="hidden lg:flex items-center gap-3 shrink-0">
+        <!-- Search Toggle Button -->
+        <button onclick="toggleHeaderSearch()" class="menu-item p-2.5 rounded-full text-white hover:bg-white/10 transition-all duration-300 flex items-center justify-center border border-white/20">
+          <i data-lucide="search" class="w-4 h-4"></i>
+        </button>
+
+        <!-- Currency Switcher Pill -->
+        <button id="currency-switch-btn" class="menu-item flex items-center gap-2 px-3.5 py-2 rounded-full text-xs font-bold border border-white/20 text-white hover:bg-white/10 transition-all duration-300" onclick="applyCurrency(currentCurrency === 'vnd' ? 'usd' : 'vnd')">
+          <i data-lucide="circle-dollar-sign" class="w-4 h-4"></i>
+          <span id="currency-text" class="tracking-widest">VND</span>
+        </button>
+
+        <!-- Language Switcher Pill -->
+        <button id="lang-switch-btn" class="menu-item flex items-center gap-2 px-3.5 py-2 rounded-full text-xs font-bold border border-white/20 text-white hover:bg-white/10 transition-all duration-300" onclick="applyLanguage(currentLang === 'vi' ? 'en' : 'vi')">
+          <i data-lucide="globe" class="w-4 h-4"></i>
+          <span id="lang-text" class="tracking-widest">VI</span>
+        </button>
+
+        <button id="login-btn" onclick="openAuthModal('login')" class="px-5 py-2 rounded-full text-xs font-bold uppercase tracking-wider border border-white/20 text-white hover:bg-white/10 transition-all duration-300" data-translate="auth.login">Đăng nhập</button>
+        <button onclick="openAuthModal('register')" class="ripple-btn px-6 py-2 rounded-full bg-primary text-white text-xs font-bold uppercase tracking-widest hover:bg-primary-dark hover:shadow-lg hover:shadow-primary/20 transition-all duration-300">Đăng ký</button>
+      </div>
+
+      <!-- Hamburger Mobile Menu Toggle -->
+      <button id="mobile-toggle" class="lg:hidden p-2 rounded-2xl text-white hover:bg-white/10 transition-all">
+        <i data-lucide="menu" class="w-6 h-6"></i>
+      </button>
+
+      <!-- Sliding Header Search Bar Overlay -->
+      <div id="header-search-bar" class="absolute top-full left-0 right-0 z-30 bg-white/95 backdrop-blur-md shadow-soft border-b border-border-light py-4 px-6 transform -translate-y-4 opacity-0 pointer-events-none transition-all duration-500 rounded-b-3xl">
+        <div class="max-w-2xl mx-auto flex items-center gap-3">
+          <div class="flex-grow flex items-center gap-3 px-4 py-2.5 rounded-2xl bg-bg border border-border-light">
+            <i data-lucide="search" class="w-4.5 h-4.5 text-primary"></i>
+            <input type="text" id="header-search-input" placeholder="Tìm kiếm tour, điểm đến (Hạ Long, Sapa...)" class="w-full text-xs text-text bg-transparent outline-none font-semibold" onkeyup="if(event.key === 'Enter') executeHeaderSearch()">
+          </div>
+          <button onclick="executeHeaderSearch()" class="px-5 py-2.5 rounded-2xl bg-primary text-white font-heading font-bold text-xs uppercase tracking-wider hover:bg-primary-dark transition-colors shadow-md shadow-primary/20">Tìm</button>
+          <button onclick="toggleHeaderSearch()" class="p-2.5 rounded-2xl text-text hover:bg-bg transition-colors"><i data-lucide="x" class="w-4.5 h-4.5"></i></button>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- Mobile Overlay Menu -->
+  <div id="mobile-menu" class="fixed inset-0 bg-bg z-35 flex flex-col pt-24 px-8 gap-6 transform translate-x-full transition-transform duration-500 lg:hidden">
+    <div class="flex flex-col gap-2 overflow-y-auto">
+      <a href="#hero" class="mobile-menu-link py-4 px-4 text-base font-bold text-text hover:bg-primary/5 rounded-2xl transition-colors" data-translate="nav.home">Trang chủ</a>
+      <a href="#destinations" class="mobile-menu-link py-4 px-4 text-base font-bold text-text hover:bg-primary/5 rounded-2xl transition-colors" data-translate="nav.destinations">Điểm đến</a>
+      <a href="#tours" class="mobile-menu-link py-4 px-4 text-base font-bold text-text hover:bg-primary/5 rounded-2xl transition-colors" data-translate="nav.tours">Tour</a>
+      <a href="#combo" class="mobile-menu-link py-4 px-4 text-base font-bold text-text hover:bg-primary/5 rounded-2xl transition-colors" data-translate="nav.combo">Combo</a>
+      <a href="#blog" class="mobile-menu-link py-4 px-4 text-base font-bold text-text hover:bg-primary/5 rounded-2xl transition-colors" data-translate="nav.blog">Cẩm nang</a>
+    </div>
+    <div class="mt-auto flex flex-col gap-4 pb-12">
+      <button id="lang-switch-btn-mobile" class="py-3.5 rounded-full border border-border-light text-sm font-bold text-text flex items-center justify-center gap-2">
+        <i data-lucide="globe" class="w-4 h-4 text-primary"></i>
+        <span id="lang-text-mobile">English</span>
+      </button>
+      <button onclick="openAuthModal('register')" class="py-3.5 rounded-full bg-primary text-white text-sm font-bold hover:bg-primary-dark transition-colors" data-translate="auth.register">Đăng ký</button>
+    </div>
+  </div>
+
+  <!-- 1. Full-Screen Parallax Hero Section (Restored Background) -->
+  <section id="hero" class="relative min-h-screen flex flex-col items-center justify-center pt-24 pb-10 overflow-hidden">
+
+
+
+    <!-- Sliding Background Image -->
+    <div class="absolute inset-0 z-0">
+      <img id="hero-slide-img" src="images/vietnam-hero.png" alt="Vietnam Background" class="w-full h-full object-cover scale-105 transition-all duration-1000">
+      <!-- Strong dark overlay gradients for text readability -->
+      <div class="absolute inset-0 bg-gradient-to-b from-black/60 via-black/35 to-black/70 z-1"></div>
+
+      <div class="absolute bottom-0 left-0 right-0 h-48 z-1 bg-gradient-to-t from-bg via-bg/70 to-transparent"></div>
+    </div>
+
+    <!-- Hero Content Overlaid -->
+    <div class="max-w-[1320px] mx-auto px-6 w-full relative z-10 text-center md:text-left flex flex-col gap-8">
+      <div class="max-w-3xl flex flex-col gap-6" data-aos="fade-up" data-aos-duration="1000">
+        <div class="inline-flex items-center gap-2 self-center md:self-start px-5 py-1.5 rounded-full bg-white/10 backdrop-blur-md border border-white/20 text-white text-xs font-bold uppercase tracking-wider font-heading">
+          <span class="w-2 h-2 rounded-full bg-accent animate-ping"></span>
+          <span data-translate="hero.eyebrow">Khám phá Việt Nam tươi đẹp</span>
+        </div>
+        <h1 class="font-heading text-4xl sm:text-5xl md:text-6xl lg:text-[76px] font-extrabold text-white leading-[1.08] tracking-tight" id="hero-main-title">
+          Hành Trình Khám Phá<br><span class="text-accent">Vẻ Đẹp Việt Nam</span>
+        </h1>
+        <p class="text-white/80 text-base md:text-lg leading-relaxed max-w-xl mx-auto md:mx-0" data-translate="hero.subtitle">
+          Từ vịnh Hạ Long huyền ảo đến phố cổ Hội An thơ mộng, khám phá những điểm đến tuyệt vời nhất Việt Nam cùng đội ngũ chuyên gia du lịch bản địa.
+        </p>
+
+        <div class="flex flex-wrap items-center justify-center md:justify-start gap-4">
+          <a href="#tours" class="ripple-btn px-8 py-3.5 rounded-full bg-primary text-white text-xs font-bold uppercase tracking-widest hover:bg-primary-dark hover:shadow-lg transition-all" data-translate="hero.cta.explore">Khám phá ngay</a>
+          <a href="#destinations" class="ripple-btn px-8 py-3.5 rounded-full bg-white/10 text-white text-xs font-bold uppercase tracking-widest border-2 border-white/25 hover:bg-white hover:text-text hover:bg-white transition-all" data-translate="hero.cta.tours">Xem điểm đến</a>
+        </div>
+
+        <!-- Horizontal Trust Metrics in White -->
+        <div class="flex items-center justify-center md:justify-start gap-8 pt-6 border-t border-white/15 max-w-md mx-auto md:mx-0">
+          <div class="flex flex-col min-w-0">
+            <span class="text-2xl font-bold font-heading text-accent">1000+</span>
+            <span class="text-[10px] uppercase font-bold text-white/60" data-translate="hero.badge.tours">1000+ Tour</span>
+          </div>
+          <div class="flex flex-col min-w-0">
+            <span class="text-2xl font-bold font-heading text-accent">4.9★</span>
+            <span class="text-[10px] uppercase font-bold text-white/60" data-translate="hero.badge.rating">4.9★ Đánh giá</span>
+          </div>
+          <div class="flex flex-col min-w-0">
+            <span class="text-2xl font-bold font-heading text-accent">24/7</span>
+            <span class="text-[10px] uppercase font-bold text-white/60">Hỗ trợ nhanh</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Advanced Floating Search Capsule (Centered at bottom) -->
+      <div class="w-full max-w-5xl mx-auto relative z-20" data-aos="fade-up" data-aos-delay="200" data-aos-duration="1000">
+        <div class="glass-strong rounded-[32px] p-3 md:p-4 shadow-hover border border-white/50">
+          <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-6 gap-3">
+            <div class="flex items-center gap-3 px-4 py-3 rounded-2xl bg-bg/50 border border-border-light text-left">
+              <i data-lucide="map-pin" class="w-4 h-4 text-primary shrink-0"></i>
+              <div class="flex flex-col min-w-0">
+                <span class="text-[9px] font-bold text-text-light uppercase tracking-wider" data-translate="search.destination">Điểm đến</span>
+                <input type="text" id="search-input-destination" placeholder="Hạ Long, Phú Quốc..." data-translate="search.destination.placeholder" class="text-xs text-text bg-transparent outline-none placeholder:text-text-light font-semibold w-full">
+              </div>
+            </div>
+            <div class="flex items-center justify-between px-4 py-3 rounded-2xl bg-bg/50 border border-border-light cursor-pointer">
+              <div class="flex items-center gap-3 text-left">
+                <i data-lucide="compass" class="w-4 h-4 text-primary shrink-0"></i>
+                <div class="flex flex-col min-w-0">
+                  <span class="text-[9px] font-bold text-text-light uppercase tracking-wider" data-translate="search.tourType">Loại hình</span>
+                  <span class="text-xs text-text-secondary font-semibold truncate" data-translate="search.tourType.placeholder">Nghỉ dưỡng</span>
+                </div>
+              </div>
+              <i data-lucide="chevron-down" class="w-3.5 h-3.5 text-text-light"></i>
+            </div>
+            <div class="flex items-center gap-3 px-4 py-3 rounded-2xl bg-bg/50 border border-border-light cursor-pointer text-left">
+              <i data-lucide="calendar" class="w-4 h-4 text-primary shrink-0"></i>
+              <div class="flex flex-col min-w-0">
+                <span class="text-[9px] font-bold text-text-light uppercase tracking-wider" data-translate="search.date">Khởi hành</span>
+                <span class="text-xs text-text-secondary font-semibold truncate" data-translate="search.date.placeholder">Chọn ngày</span>
+              </div>
+            </div>
+            <div class="flex items-center gap-3 px-4 py-3 rounded-2xl bg-bg/50 border border-border-light cursor-pointer text-left">
+              <i data-lucide="users" class="w-4 h-4 text-primary shrink-0"></i>
+              <div class="flex flex-col min-w-0">
+                <span class="text-[9px] font-bold text-text-light uppercase tracking-wider" data-translate="search.guests">Số khách</span>
+                <span class="text-xs text-text-secondary font-semibold truncate" data-translate="search.guests.placeholder">Số người</span>
+              </div>
+            </div>
+            <div class="flex items-center justify-between px-4 py-3 rounded-2xl bg-bg/50 border border-border-light cursor-pointer">
+              <div class="flex items-center gap-3 text-left">
+                <i data-lucide="wallet" class="w-4 h-4 text-primary shrink-0"></i>
+                <div class="flex flex-col min-w-0">
+                  <span class="text-[9px] font-bold text-text-light uppercase tracking-wider" data-translate="search.budget">Ngân sách</span>
+                  <span class="text-xs text-text-secondary font-semibold whitespace-nowrap" data-translate="search.budget.placeholder">Chọn mức giá</span>
+                </div>
+              </div>
+              <i data-lucide="chevron-down" class="w-3.5 h-3.5 text-text-light"></i>
+            </div>
+            <button onclick="handleSearch()" class="w-full py-3.5 rounded-2xl bg-primary text-white font-heading font-bold text-xs uppercase tracking-widest hover:bg-primary-dark transition-all flex items-center justify-center gap-2 shadow-md shadow-primary/20">
+              <i data-lucide="search" class="w-3.5 h-3.5"></i>
+              <span data-translate="search.button">Tìm kiếm</span>
+            </button>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- 2. Categories Section (Colorful Accents) -->
+  <section class="py-28 bg-bg relative overflow-hidden">
+    <!-- Tropical Leaf Watermarks -->
+    <div class="absolute right-0 top-0 pointer-events-none opacity-[0.03] text-primary z-0 transform translate-x-1/4 -translate-y-1/4 select-none">
+      <svg width="280" height="280" viewBox="0 0 100 100" fill="currentColor">
+        <path d="M80,10 C70,25 60,30 50,45 C40,30 30,25 20,10 C25,30 35,45 50,55 C65,45 75,30 80,10 Z M50,55 C48,70 42,85 35,100 C48,90 55,75 50,55 Z"/>
+      </svg>
+    </div>
+    <div class="absolute left-0 bottom-0 pointer-events-none opacity-[0.03] text-primary z-0 transform -translate-x-1/4 translate-y-1/4 select-none">
+      <svg width="280" height="280" viewBox="0 0 100 100" fill="currentColor" class="rotate-180">
+        <path d="M80,10 C70,25 60,30 50,45 C40,30 30,25 20,10 C25,30 35,45 50,55 C65,45 75,30 80,10 Z M50,55 C48,70 42,85 35,100 C48,90 55,75 50,55 Z"/>
+      </svg>
+    </div>
+    <div class="max-w-[1320px] mx-auto px-6 text-center relative z-10">
+      <div class="max-w-2xl mx-auto flex flex-col items-center gap-4 mb-16" data-aos="fade-up">
+        <span class="px-5 py-1.5 rounded-full bg-primary/8 text-primary text-xs font-bold uppercase tracking-wider font-heading" data-translate="categories.eyebrow">Danh mục du lịch</span>
+        <h2 class="font-heading text-3xl md:text-[42px] font-extrabold text-text leading-tight" data-translate="categories.title">Khám Phá Theo Phong Cách Của Bạn</h2>
+        <div class="w-16 h-[3px] bg-primary rounded-full mt-2"></div>
+      </div>
+
+      <div class="grid grid-cols-2 md:grid-cols-4 gap-6">
+        <!-- Beach (Sky Blue) -->
+        <div class="group p-8 rounded-[32px] bg-white border border-border-light shadow-card hover:-translate-y-2 hover:shadow-hover hover:border-skyBlue/20 transition-all duration-500 text-center cursor-pointer card-shimmer" data-aos="fade-up" data-aos-delay="50">
+          <div class="w-16 h-16 rounded-[24px] bg-sky-50 text-skyBlue flex items-center justify-center mx-auto mb-6 group-hover:scale-110 group-hover:bg-skyBlue group-hover:text-white transition-all duration-500">
+            <i data-lucide="waves" class="w-7 h-7"></i>
+          </div>
+          <h3 class="font-heading font-extrabold text-base text-text mb-1" data-translate="cat.beach">Biển đảo</h3>
+          <span class="text-xs font-medium text-text-secondary">156 tours</span>
+        </div>
+        <!-- Mountain (Emerald Green) -->
+        <div class="group p-8 rounded-[32px] bg-white border border-border-light shadow-card hover:-translate-y-2 hover:shadow-hover hover:border-primary/25 transition-all duration-500 text-center cursor-pointer card-shimmer" data-aos="fade-up" data-aos-delay="100">
+          <div class="w-16 h-16 rounded-[24px] bg-emerald-50 text-primary flex items-center justify-center mx-auto mb-6 group-hover:scale-110 group-hover:bg-primary group-hover:text-white transition-all duration-500">
+            <i data-lucide="mountain" class="w-7 h-7"></i>
+          </div>
+          <h3 class="font-heading font-extrabold text-base text-text mb-1" data-translate="cat.mountain">Núi rừng</h3>
+          <span class="text-xs font-medium text-text-secondary">89 tours</span>
+        </div>
+        <!-- Heritage (Amber Gold) -->
+        <div class="group p-8 rounded-[32px] bg-white border border-border-light shadow-card hover:-translate-y-2 hover:shadow-hover hover:border-amberGold/20 transition-all duration-500 text-center cursor-pointer card-shimmer" data-aos="fade-up" data-aos-delay="150">
+          <div class="w-16 h-16 rounded-[24px] bg-amber-50 text-amberGold flex items-center justify-center mx-auto mb-6 group-hover:scale-110 group-hover:bg-amberGold group-hover:text-white transition-all duration-500">
+            <i data-lucide="landmark" class="w-7 h-7"></i>
+          </div>
+          <h3 class="font-heading font-extrabold text-base text-text mb-1" data-translate="cat.heritage">Di sản văn hóa</h3>
+          <span class="text-xs font-medium text-text-secondary">124 tours</span>
+        </div>
+        <!-- Cuisine (Coral Rose) -->
+        <div class="group p-8 rounded-[32px] bg-white border border-border-light shadow-card hover:-translate-y-2 hover:shadow-hover hover:border-coralRose/20 transition-all duration-500 text-center cursor-pointer card-shimmer" data-aos="fade-up" data-aos-delay="200">
+          <div class="w-16 h-16 rounded-[24px] bg-rose-50 text-coralRose flex items-center justify-center mx-auto mb-6 group-hover:scale-110 group-hover:bg-coralRose group-hover:text-white transition-all duration-500">
+            <i data-lucide="utensils-crossed" class="w-7 h-7"></i>
+          </div>
+          <h3 class="font-heading font-extrabold text-base text-text mb-1" data-translate="cat.cuisine">Ẩm thực</h3>
+          <span class="text-xs font-medium text-text-secondary">78 tours</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Elegant Lotus Divider -->
+  <div class="flex items-center justify-center gap-4 my-8 opacity-60 pointer-events-none select-none">
+    <div class="h-[1px] w-24 bg-gradient-to-r from-transparent to-primary/30"></div>
+    <svg class="w-8 h-8 text-primary/40" viewBox="0 0 100 100" fill="none" stroke="currentColor" stroke-width="1.5">
+      <path d="M50 20 C53 38, 62 48, 50 82 C38 48, 47 38, 50 20 Z" fill="currentColor" fill-opacity="0.08"/>
+      <path d="M50 42 C32 32, 22 47, 34 65 C44 58, 48 52, 50 42 Z" fill="currentColor" fill-opacity="0.06"/>
+      <path d="M50 55 C18 45, 12 63, 24 75 C36 71, 46 63, 50 55 Z" fill="currentColor" fill-opacity="0.04"/>
+      <path d="M50 42 C68 32, 78 47, 66 65 C56 58, 52 52, 50 42 Z" fill="currentColor" fill-opacity="0.06"/>
+      <path d="M50 55 C82 45, 88 63, 76 75 C64 71, 54 63, 50 55 Z" fill="currentColor" fill-opacity="0.04"/>
+      <path d="M32 80 C40 85, 60 85, 68 80 C63 76, 37 76, 32 80 Z" fill="currentColor" fill-opacity="0.15"/>
+    </svg>
+    <div class="h-[1px] w-24 bg-gradient-to-l from-transparent to-primary/30"></div>
+  </div>
+
+  <!-- 3. Asymmetric Bento Grid Destinations -->
+  <section id="destinations" class="py-28 bg-bg-alt relative overflow-hidden">
+    <!-- Decorative backgrounds -->
+    <div class="absolute inset-0 z-0 opacity-30 bg-[radial-gradient(#2E8B57_1px,transparent_1px)] [background-size:24px_24px] pointer-events-none"></div>
+    <div class="absolute -left-16 top-1/4 z-0 text-primary/5 opacity-[0.04] pointer-events-none transform -rotate-12">
+      <i data-lucide="compass" class="w-96 h-96"></i>
+    </div>
+    <div class="absolute -right-16 bottom-1/4 z-0 text-primary/5 opacity-[0.04] pointer-events-none transform rotate-12">
+      <i data-lucide="map" class="w-96 h-96"></i>
+    </div>
+    <!-- Floating 2D Travel Suitcase & Camera Illustration -->
+    <div class="absolute -left-12 bottom-10 z-0 pointer-events-none hidden xl:block opacity-20 hover:opacity-60 transition-opacity duration-500 animate-float select-none" style="animation-duration: 6s;">
+      <svg width="150" height="150" viewBox="0 0 200 200" fill="none">
+        <!-- Suitcase body -->
+        <rect x="40" y="70" width="120" height="90" rx="16" fill="#3CB371" stroke="#2E8B57" stroke-width="4"/>
+        <!-- Handle -->
+        <path d="M80 70V50C80 44.4772 84.4772 40 90 40H110C115.523 40 120 44.4772 120 50V70" stroke="#2E8B57" stroke-width="4" stroke-linecap="round"/>
+        <!-- Corners -->
+        <rect x="40" y="70" width="30" height="30" rx="8" fill="#2E8B57" opacity="0.3"/>
+        <rect x="130" y="70" width="30" height="30" rx="8" fill="#2E8B57" opacity="0.3"/>
+        <!-- Straps -->
+        <line x1="70" y1="70" x2="70" y2="160" stroke="#1E5C3A" stroke-width="4"/>
+        <line x1="130" y1="70" x2="130" y2="160" stroke="#1E5C3A" stroke-width="4"/>
+        <!-- Stickers -->
+        <circle cx="100" cy="115" r="18" fill="#FF7F50" opacity="0.8"/>
+        <polygon points="90,115 100,100 110,115" fill="#FFE082"/>
+      </svg>
+    </div>
+    <div class="max-w-[1320px] mx-auto px-6 relative z-10">
+      <div class="flex flex-col md:flex-row md:items-end justify-between mb-16 gap-6" data-aos="fade-up">
+        <div class="flex flex-col gap-3">
+          <span class="px-5 py-1.5 rounded-full bg-primary/8 text-primary text-xs font-bold uppercase tracking-wider self-start font-heading" data-translate="destinations.eyebrow">Điểm đến nổi bật</span>
+          <h2 class="font-heading text-3xl md:text-[42px] font-extrabold text-text leading-tight" data-translate="destinations.title">Những Địa Danh Không Thể Bỏ Lỡ</h2>
+        </div>
+        <button class="flex items-center gap-2 text-primary font-heading font-bold text-sm hover:gap-3.5 transition-all shrink-0">
+          <span data-translate="ui.viewAll">Xem tất cả</span>
+          <i data-lucide="arrow-right" class="w-4 h-4"></i>
+        </button>
+      </div>
+
+      <!-- Bento Layout -->
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+        <!-- Ha Long -->
+        <div onclick="openBookingModal('Du thuyền Vịnh Hạ Long', '5990000')" class="group relative md:col-span-2 h-[300px] md:h-[500px] rounded-[32px] overflow-hidden cursor-pointer shadow-card hover:-translate-y-2 hover:shadow-hover transition-all duration-700" data-aos="fade-right">
+          <img src="images/halong.png" alt="Ha Long" class="absolute inset-0 w-full h-full object-cover group-hover:scale-105 transition-transform duration-1000">
+          <div class="absolute inset-0 bg-gradient-to-t from-black/85 via-black/30 to-transparent"></div>
+          <div class="absolute top-6 left-6 px-4 py-1.5 rounded-full bg-emerald-600/90 text-white text-xs font-bold shadow-md" data-translate="regional.north">Miền Bắc</div>
+          <div class="absolute top-6 right-6 flex items-center gap-1 px-3.5 py-1.5 rounded-full bg-black/45 backdrop-blur-md border border-white/10 text-amberGold font-bold text-xs shadow-md">
+            <i data-lucide="star" class="w-3.5 h-3.5 fill-current"></i> 4.9
+          </div>
+          <div class="absolute bottom-6 left-6 right-6 p-2 flex flex-col gap-2">
+            <h3 class="font-heading text-2xl md:text-3xl font-extrabold text-white">Vịnh Hạ Long</h3>
+            <p class="text-white/70 text-sm max-w-xl line-clamp-2" data-translate="dest.halong.desc">Di sản thiên nhiên thế giới với hàng nghìn đảo đá vôi, hang động kỳ vĩ giữa làn nước xanh ngọc bích.</p>
+            <span class="text-accent font-bold text-xs mt-2 flex items-center gap-1">45 tours <span class="text-white/40">•</span> Khám phá ngay <i data-lucide="arrow-right" class="w-3 h-3"></i></span>
+          </div>
+        </div>
+
+        <!-- Sapa -->
+        <div onclick="openBookingModal('Tour Trekking Sa Pa', '4590000')" class="group relative h-[300px] md:h-[500px] rounded-[32px] overflow-hidden cursor-pointer shadow-card hover:-translate-y-2 hover:shadow-hover transition-all duration-700" data-aos="fade-left">
+          <img src="images/sapa.png" alt="Sapa" class="absolute inset-0 w-full h-full object-cover group-hover:scale-105 transition-transform duration-1000">
+          <div class="absolute inset-0 bg-gradient-to-t from-black/85 via-black/30 to-transparent"></div>
+          <div class="absolute top-6 left-6 px-4 py-1.5 rounded-full bg-emerald-600/90 text-white text-xs font-bold shadow-md" data-translate="regional.north">Miền Bắc</div>
+          <div class="absolute top-6 right-6 flex items-center gap-1 px-3.5 py-1.5 rounded-full bg-black/45 backdrop-blur-md border border-white/10 text-amberGold font-bold text-xs shadow-md">
+            <i data-lucide="star" class="w-3.5 h-3.5 fill-current"></i> 4.8
+          </div>
+          <div class="absolute bottom-6 left-6 right-6 p-2 flex flex-col gap-2">
+            <h3 class="font-heading text-xl md:text-2xl font-extrabold text-white">Sa Pa</h3>
+            <p class="text-white/70 text-xs line-clamp-2" data-translate="dest.sapa.desc">Ruộng bậc thang trải dài giữa núi rừng Tây Bắc, nơi sinh sống của các dân tộc thiểu số với văn hóa đặc sắc.</p>
+            <span class="text-accent font-bold text-xs mt-1 flex items-center gap-1">32 tours <span class="text-white/40">•</span> Khám phá ngay <i data-lucide="arrow-right" class="w-3 h-3"></i></span>
+          </div>
+        </div>
+
+        <!-- Hoi An -->
+        <div onclick="openBookingModal('Hành trình Di sản Hội An', '3500000')" class="group relative h-[240px] md:h-[360px] rounded-[32px] overflow-hidden cursor-pointer shadow-card hover:-translate-y-2 hover:shadow-hover transition-all duration-700" data-aos="fade-up">
+          <img src="images/hoian.png" alt="Hoi An" class="absolute inset-0 w-full h-full object-cover group-hover:scale-105 transition-transform duration-1000">
+          <div class="absolute inset-0 bg-gradient-to-t from-black/85 via-black/15 to-transparent"></div>
+          <div class="absolute top-6 left-6 px-4 py-1.5 rounded-full bg-amber-500/90 text-white text-xs font-bold shadow-md" data-translate="regional.central">Miền Trung</div>
+          <div class="absolute bottom-6 left-6 p-2 flex flex-col gap-1">
+            <h3 class="font-heading text-xl font-extrabold text-white">Hội An</h3>
+            <span class="text-amberGold font-bold text-xs">38 tours • 4.8★</span>
+          </div>
+        </div>
+
+        <!-- Da Nang -->
+        <div onclick="openBookingModal('Du ngoạn biển Đà Nẵng', '3200000')" class="group relative h-[240px] md:h-[360px] rounded-[32px] overflow-hidden cursor-pointer shadow-card hover:-translate-y-2 hover:shadow-hover transition-all duration-700" data-aos="fade-up" data-aos-delay="100">
+          <img src="images/danang.png" alt="Da Nang" class="absolute inset-0 w-full h-full object-cover group-hover:scale-105 transition-transform duration-1000">
+          <div class="absolute inset-0 bg-gradient-to-t from-black/85 via-black/15 to-transparent"></div>
+          <div class="absolute top-6 left-6 px-4 py-1.5 rounded-full bg-amber-500/90 text-white text-xs font-bold shadow-md" data-translate="regional.central">Miền Trung</div>
+          <div class="absolute bottom-6 left-6 p-2 flex flex-col gap-1">
+            <h3 class="font-heading text-xl font-extrabold text-white">Đà Nẵng</h3>
+            <span class="text-amberGold font-bold text-xs">41 tours • 4.7★</span>
+          </div>
+        </div>
+
+        <!-- Phu Quoc -->
+        <div onclick="openBookingModal('Nghỉ dưỡng biển Phú Quốc', '4800000')" class="group relative h-[240px] md:h-[360px] rounded-[32px] overflow-hidden cursor-pointer shadow-card hover:-translate-y-2 hover:shadow-hover transition-all duration-700" data-aos="fade-up" data-aos-delay="200">
+          <img src="images/phuquoc.png" alt="Phu Quoc" class="absolute inset-0 w-full h-full object-cover group-hover:scale-105 transition-transform duration-1000">
+          <div class="absolute inset-0 bg-gradient-to-t from-black/85 via-black/15 to-transparent"></div>
+          <div class="absolute top-6 left-6 px-4 py-1.5 rounded-full bg-skyBlue/90 text-white text-xs font-bold shadow-md" data-translate="regional.south">Miền Nam</div>
+          <div class="absolute bottom-6 left-6 p-2 flex flex-col gap-1">
+            <h3 class="font-heading text-xl font-extrabold text-white">Phú Quốc</h3>
+            <span class="text-skyBlue font-bold text-xs">36 tours • 4.8★</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Elegant Lotus Divider -->
+  <div class="flex items-center justify-center gap-4 my-8 opacity-60 pointer-events-none select-none">
+    <div class="h-[1px] w-24 bg-gradient-to-r from-transparent to-primary/30"></div>
+    <svg class="w-8 h-8 text-primary/40" viewBox="0 0 100 100" fill="none" stroke="currentColor" stroke-width="1.5">
+      <path d="M50 20 C53 38, 62 48, 50 82 C38 48, 47 38, 50 20 Z" fill="currentColor" fill-opacity="0.08"/>
+      <path d="M50 42 C32 32, 22 47, 34 65 C44 58, 48 52, 50 42 Z" fill="currentColor" fill-opacity="0.06"/>
+      <path d="M50 55 C18 45, 12 63, 24 75 C36 71, 46 63, 50 55 Z" fill="currentColor" fill-opacity="0.04"/>
+      <path d="M50 42 C68 32, 78 47, 66 65 C56 58, 52 52, 50 42 Z" fill="currentColor" fill-opacity="0.06"/>
+      <path d="M50 55 C82 45, 88 63, 76 75 C64 71, 54 63, 50 55 Z" fill="currentColor" fill-opacity="0.04"/>
+      <path d="M32 80 C40 85, 60 85, 68 80 C63 76, 37 76, 32 80 Z" fill="currentColor" fill-opacity="0.15"/>
+    </svg>
+    <div class="h-[1px] w-24 bg-gradient-to-l from-transparent to-primary/30"></div>
+  </div>
+
+  <!-- 4. Premium Curated Tours -->
+  <section id="tours" class="py-28 bg-bg relative overflow-hidden">
+    <!-- Glowing Accent Blobs -->
+    <div class="absolute top-1/4 -left-48 w-96 h-96 bg-primary/10 rounded-full filter blur-[120px] pointer-events-none"></div>
+    <div class="absolute bottom-1/4 -right-48 w-96 h-96 bg-accent/8 rounded-full filter blur-[120px] pointer-events-none"></div>
+    <div class="max-w-[1320px] mx-auto px-6 relative z-10">
+      <div class="flex flex-col md:flex-row md:items-end justify-between mb-16 gap-6" data-aos="fade-up">
+        <div class="flex flex-col gap-3">
+          <span class="px-5 py-1.5 rounded-full bg-primary/8 text-primary text-xs font-bold uppercase tracking-wider self-start font-heading" data-translate="tours.eyebrow">Tour nổi bật</span>
+          <h2 class="font-heading text-3xl md:text-[42px] font-extrabold text-text leading-tight" data-translate="tours.title">Hành Trình Được Yêu Thích Nhất</h2>
+        </div>
+        <button class="flex items-center gap-2 text-primary font-heading font-bold text-sm hover:gap-3.5 transition-all shrink-0">
+          <span data-translate="ui.viewAll">Xem tất cả</span>
+          <i data-lucide="arrow-right" class="w-4 h-4"></i>
+        </button>
+      </div>
+
+      <!-- Region Filter Tags -->
+      <div class="flex flex-wrap items-center justify-center gap-3 mb-12" data-aos="fade-up" data-aos-delay="50">
+        <button onclick="filterTours('all', this)" class="tour-filter-btn px-6 py-2.5 rounded-full text-xs font-bold uppercase tracking-wider bg-primary text-white shadow-md transition-all duration-300">Tất cả</button>
+        <button onclick="filterTours('north', this)" class="tour-filter-btn px-6 py-2.5 rounded-full text-xs font-bold uppercase tracking-wider bg-white text-text-secondary border border-border-light hover:bg-primary/5 hover:border-primary/20 transition-all duration-300">Miền Bắc</button>
+        <button onclick="filterTours('central', this)" class="tour-filter-btn px-6 py-2.5 rounded-full text-xs font-bold uppercase tracking-wider bg-white text-text-secondary border border-border-light hover:bg-primary/5 hover:border-primary/20 transition-all duration-300">Miền Trung</button>
+        <button onclick="filterTours('south', this)" class="tour-filter-btn px-6 py-2.5 rounded-full text-xs font-bold uppercase tracking-wider bg-white text-text-secondary border border-border-light hover:bg-primary/5 hover:border-primary/20 transition-all duration-300">Miền Nam</button>
+      </div>
+
+      <div id="tours-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+        <!-- Tour 1 -->
+        <div class="tour-card group bg-white rounded-[32px] overflow-hidden border border-border-light shadow-card hover:-translate-y-2.5 hover:shadow-hover hover:border-primary/10 transition-all duration-500 flex flex-col" data-aos="fade-up" data-region="north">
+          <div class="relative h-60 overflow-hidden">
+            <img src="images/halong.png" alt="Ha Long Cruise" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700">
+            <div class="absolute top-4 left-4 z-10 px-3.5 py-1.5 rounded-full bg-coralRose text-white text-[10px] font-bold uppercase tracking-widest font-heading shadow-md" data-translate="ui.bestSeller">Bán chạy</div>
+            <button onclick="toggleWishlist(this, 'Du thuyền Vịnh Hạ Long 3N2Đ')" class="absolute bottom-4 right-4 z-10 w-10 h-10 rounded-full glass flex items-center justify-center hover:bg-white transition-all shadow-card duration-300">
+              <i data-lucide="heart" class="w-4.5 h-4.5 text-text hover:text-rose-500 fill-transparent transition-colors"></i>
+            </button>
+          </div>
+          <div class="p-6 md:p-8 flex flex-col gap-4 flex-grow text-left">
+            <div class="flex items-center justify-between">
+              <span class="text-[10px] font-bold text-primary uppercase tracking-widest font-heading" data-translate="difficulty.easy">Dễ</span>
+              <div class="flex items-center gap-1 text-xs font-bold text-amberGold bg-amber-50 px-2.5 py-1 rounded-full">
+                <i data-lucide="star" class="w-3.5 h-3.5 text-amberGold fill-current"></i> 4.9
+              </div>
+            </div>
+            <h3 class="font-heading text-lg md:text-xl font-extrabold text-text group-hover:text-primary transition-colors leading-snug line-clamp-2">Du thuyền Vịnh Hạ Long 3N2Đ</h3>
+            <div class="flex items-center gap-5 text-text-secondary text-xs font-semibold">
+              <span class="flex items-center gap-1.5"><i data-lucide="clock" class="w-4 h-4 text-primary"></i> 3 <span data-translate="ui.days">ngày</span></span>
+              <span class="flex items-center gap-1.5"><i data-lucide="users" class="w-4 h-4 text-primary"></i> 2-15 <span data-translate="ui.person">người</span></span>
+            </div>
+            <div class="flex items-end justify-between pt-5 mt-auto border-t border-border-light gap-2">
+              <div class="flex flex-col min-w-0">
+                <span class="text-[9px] text-text-light uppercase tracking-wider font-bold" data-translate="ui.from">Từ</span>
+                <span class="font-heading text-xl font-extrabold text-primary price-val" data-price-vnd="5990000">5.990.000đ</span>
+              </div>
+              <button onclick="openBookingModal('Du thuyền Vịnh Hạ Long 3N2Đ', '5990000')" class="shrink-0 whitespace-nowrap px-3 py-1.5 rounded-full bg-primary text-white text-[10px] sm:text-xs font-bold uppercase tracking-widest hover:bg-primary-dark transition-all duration-300 shadow-sm" data-translate="ui.bookNow">Đặt ngay</button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Tour 2 -->
+        <div class="tour-card group bg-white rounded-[32px] overflow-hidden border border-border-light shadow-card hover:-translate-y-2.5 hover:shadow-hover hover:border-primary/10 transition-all duration-500 flex flex-col" data-aos="fade-up" data-aos-delay="100" data-region="north">
+          <div class="relative h-60 overflow-hidden">
+            <img src="images/sapa.png" alt="Sapa Trekking" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700">
+            <div class="absolute top-4 left-4 z-10 px-3.5 py-1.5 rounded-full bg-skyBlue text-white text-[10px] font-bold uppercase tracking-widest font-heading shadow-md" data-translate="ui.hot">Hot</div>
+            <button onclick="toggleWishlist(this, 'Trekking Sa Pa – Fansipan 4N3Đ')" class="absolute bottom-4 right-4 z-10 w-10 h-10 rounded-full glass flex items-center justify-center hover:bg-white transition-all shadow-card duration-300">
+              <i data-lucide="heart" class="w-4.5 h-4.5 text-text hover:text-rose-500 fill-transparent transition-colors"></i>
+            </button>
+          </div>
+          <div class="p-6 md:p-8 flex flex-col gap-4 flex-grow text-left">
+            <div class="flex items-center justify-between">
+              <span class="text-[10px] font-bold text-primary uppercase tracking-widest font-heading" data-translate="difficulty.moderate">Trung bình</span>
+              <div class="flex items-center gap-1 text-xs font-bold text-amberGold bg-amber-50 px-2.5 py-1 rounded-full">
+                <i data-lucide="star" class="w-3.5 h-3.5 text-amberGold fill-current"></i> 4.8
+              </div>
+            </div>
+            <h3 class="font-heading text-lg md:text-xl font-extrabold text-text group-hover:text-primary transition-colors leading-snug line-clamp-2">Trekking Sa Pa – Fansipan 4N3Đ</h3>
+            <div class="flex items-center gap-5 text-text-secondary text-xs font-semibold">
+              <span class="flex items-center gap-1.5"><i data-lucide="clock" class="w-4 h-4 text-primary"></i> 4 <span data-translate="ui.days">ngày</span></span>
+              <span class="flex items-center gap-1.5"><i data-lucide="users" class="w-4 h-4 text-primary"></i> 4-12 <span data-translate="ui.person">người</span></span>
+            </div>
+            <div class="flex items-end justify-between pt-5 mt-auto border-t border-border-light gap-2">
+              <div class="flex flex-col min-w-0">
+                <span class="text-[9px] text-text-light uppercase tracking-wider font-bold" data-translate="ui.from">Từ</span>
+                <span class="font-heading text-xl font-extrabold text-primary price-val" data-price-vnd="4590000">4.590.000đ</span>
+              </div>
+              <button onclick="openBookingModal('Trekking Sa Pa – Fansipan 4N3Đ', '4590000')" class="shrink-0 whitespace-nowrap px-3 py-1.5 rounded-full bg-primary text-white text-[10px] sm:text-xs font-bold uppercase tracking-widest hover:bg-primary-dark transition-all duration-300 shadow-sm" data-translate="ui.bookNow">Đặt ngay</button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Tour 3 -->
+        <div class="tour-card group bg-white rounded-[32px] overflow-hidden border border-border-light shadow-card hover:-translate-y-2.5 hover:shadow-hover hover:border-primary/10 transition-all duration-500 flex flex-col" data-aos="fade-up" data-aos-delay="200" data-region="central">
+          <div class="relative h-60 overflow-hidden">
+            <img src="images/hoian.png" alt="Central Heritage" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700">
+            <div class="absolute top-4 left-4 z-10 px-3.5 py-1.5 rounded-full bg-coralRose text-white text-[10px] font-bold uppercase tracking-widest font-heading shadow-md" data-translate="ui.bestSeller">Bán chạy</div>
+            <button onclick="toggleWishlist(this, 'Hành trình Di sản Miền Trung 5N4Đ')" class="absolute bottom-4 right-4 z-10 w-10 h-10 rounded-full glass flex items-center justify-center hover:bg-white transition-all shadow-card duration-300">
+              <i data-lucide="heart" class="w-4.5 h-4.5 text-text hover:text-rose-500 fill-transparent transition-colors"></i>
+            </button>
+          </div>
+          <div class="p-6 md:p-8 flex flex-col gap-4 flex-grow text-left">
+            <div class="flex items-center justify-between">
+              <span class="text-[10px] font-bold text-primary uppercase tracking-widest font-heading" data-translate="difficulty.easy">Dễ</span>
+              <div class="flex items-center gap-1 text-xs font-bold text-amberGold bg-amber-50 px-2.5 py-1 rounded-full">
+                <i data-lucide="star" class="w-3.5 h-3.5 text-amberGold fill-current"></i> 4.9
+              </div>
+            </div>
+            <h3 class="font-heading text-lg md:text-xl font-extrabold text-text group-hover:text-primary transition-colors leading-snug line-clamp-2">Hành trình Di sản Miền Trung 5N4Đ</h3>
+            <div class="flex items-center gap-5 text-text-secondary text-xs font-semibold">
+              <span class="flex items-center gap-1.5"><i data-lucide="clock" class="w-4 h-4 text-primary"></i> 5 <span data-translate="ui.days">ngày</span></span>
+              <span class="flex items-center gap-1.5"><i data-lucide="users" class="w-4 h-4 text-primary"></i> 2-20 <span data-translate="ui.person">người</span></span>
+            </div>
+            <div class="flex items-end justify-between pt-5 mt-auto border-t border-border-light gap-2">
+              <div class="flex flex-col min-w-0">
+                <span class="text-[9px] text-text-light uppercase tracking-wider font-bold" data-translate="ui.from">Từ</span>
+                <span class="font-heading text-xl font-extrabold text-primary price-val" data-price-vnd="6990000">6.990.000đ</span>
+              </div>
+              <button onclick="openBookingModal('Hành trình Di sản Miền Trung 5N4Đ', '6990000')" class="shrink-0 whitespace-nowrap px-3 py-1.5 rounded-full bg-primary text-white text-[10px] sm:text-xs font-bold uppercase tracking-widest hover:bg-primary-dark transition-all duration-300 shadow-sm" data-translate="ui.bookNow">Đặt ngay</button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Tour 4 -->
+        <div class="tour-card group bg-white rounded-[32px] overflow-hidden border border-border-light shadow-card hover:-translate-y-2.5 hover:shadow-hover hover:border-primary/10 transition-all duration-500 flex flex-col" data-aos="fade-up" data-aos-delay="300" data-region="south">
+          <div class="relative h-60 overflow-hidden">
+            <img src="images/phuquoc.png" alt="Phu Quoc Tour" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700">
+            <div class="absolute top-4 left-4 z-10 px-3.5 py-1.5 rounded-full bg-skyBlue text-white text-[10px] font-bold uppercase tracking-widest font-heading shadow-md">Hot</div>
+            <button onclick="toggleWishlist(this, 'Nghỉ dưỡng biển đảo Phú Quốc 4N3Đ')" class="absolute bottom-4 right-4 z-10 w-10 h-10 rounded-full glass flex items-center justify-center hover:bg-white transition-all shadow-card duration-300">
+              <i data-lucide="heart" class="w-4.5 h-4.5 text-text hover:text-rose-500 fill-transparent transition-colors"></i>
+            </button>
+          </div>
+          <div class="p-6 md:p-8 flex flex-col gap-4 flex-grow text-left">
+            <div class="flex items-center justify-between">
+              <span class="text-[10px] font-bold text-primary uppercase tracking-widest font-heading" data-translate="difficulty.easy">Dễ</span>
+              <div class="flex items-center gap-1 text-xs font-bold text-amberGold bg-amber-50 px-2.5 py-1 rounded-full">
+                <i data-lucide="star" class="w-3.5 h-3.5 text-amberGold fill-current"></i> 4.8
+              </div>
+            </div>
+            <h3 class="font-heading text-lg md:text-xl font-extrabold text-text group-hover:text-primary transition-colors leading-snug line-clamp-2">Nghỉ dưỡng biển đảo Phú Quốc 4N3Đ</h3>
+            <div class="flex items-center gap-5 text-text-secondary text-xs font-semibold">
+              <span class="flex items-center gap-1.5"><i data-lucide="clock" class="w-4 h-4 text-primary"></i> 4 <span data-translate="ui.days">ngày</span></span>
+              <span class="flex items-center gap-1.5"><i data-lucide="users" class="w-4 h-4 text-primary"></i> 2-10 <span data-translate="ui.person">người</span></span>
+            </div>
+            <div class="flex items-end justify-between pt-5 mt-auto border-t border-border-light gap-2">
+              <div class="flex flex-col min-w-0">
+                <span class="text-[9px] text-text-light uppercase tracking-wider font-bold" data-translate="ui.from">Từ</span>
+                <span class="font-heading text-xl font-extrabold text-primary price-val" data-price-vnd="4890000">4.890.000đ</span>
+              </div>
+              <button onclick="openBookingModal('Nghỉ dưỡng biển đảo Phú Quốc 4N3Đ', '4890000')" class="shrink-0 whitespace-nowrap px-3 py-1.5 rounded-full bg-primary text-white text-[10px] sm:text-xs font-bold uppercase tracking-widest hover:bg-primary-dark transition-all duration-300 shadow-sm" data-translate="ui.bookNow">Đặt ngay</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 5. Regional Tours Section -->
+  <section class="py-28 bg-bg-alt relative overflow-hidden">
+    <!-- Decorative backgrounds -->
+    <div class="absolute inset-0 z-0 opacity-40 bg-[linear-gradient(45deg,rgba(46,139,87,0.02)_25%,transparent_25%,transparent_50%,rgba(46,139,87,0.02)_50%,rgba(46,139,87,0.02)_75%,transparent_75%,transparent)] bg-[size:40px_40px] pointer-events-none"></div>
+    <div class="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 z-0 text-emerald-600/5 opacity-[0.03] pointer-events-none">
+      <i data-lucide="trees" class="w-[500px] h-[500px]"></i>
+    </div>
+    <div class="max-w-[1320px] mx-auto px-6 relative z-10">
+      <div class="max-w-2xl mx-auto flex flex-col items-center gap-3 mb-12 text-center" data-aos="fade-up">
+        <span class="px-5 py-1.5 rounded-full bg-primary/8 text-primary text-xs font-bold uppercase tracking-wider font-heading" data-translate="regional.eyebrow">Tour theo vùng miền</span>
+        <h2 class="font-heading text-3xl md:text-[42px] font-extrabold text-text leading-tight" data-translate="regional.title">Khám Phá Theo Vùng Miền</h2>
+      </div>
+
+      <!-- Regional Tabs -->
+      <div class="flex justify-center gap-3 mb-16" data-aos="fade-up" data-aos-delay="100">
+        <button onclick="switchRegion('north', this)" class="region-tab px-7 py-3 rounded-full text-xs font-bold uppercase tracking-widest bg-emerald-600 text-white shadow-lg shadow-emerald-600/20 border border-emerald-600 transition-all duration-300">Miền Bắc</button>
+        <button onclick="switchRegion('central', this)" class="region-tab px-7 py-3 rounded-full text-xs font-bold uppercase tracking-widest bg-white text-text-secondary hover:text-amberGold border border-border-light hover:border-amberGold/25 transition-all duration-300">Miền Trung</button>
+        <button onclick="switchRegion('south', this)" class="region-tab px-7 py-3 rounded-full text-xs font-bold uppercase tracking-widest bg-white text-text-secondary hover:text-skyBlue border border-border-light hover:border-skyBlue/25 transition-all duration-300">Miền Nam</button>
+      </div>
+
+      <!-- Regional Panel -->
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center text-left" id="region-panel">
+        <div class="lg:col-span-6 relative h-80 md:h-[450px] rounded-[32px] overflow-hidden shadow-hover" data-aos="fade-right">
+          <img id="region-img" src="images/sapa.png" alt="Northern" class="w-full h-full object-cover">
+          <div class="absolute inset-0 bg-black/30"></div>
+          <span class="absolute bottom-8 left-8 font-heading text-3xl font-extrabold text-white border-l-4 border-emerald-500 pl-4" id="region-title">Miền Bắc</span>
+        </div>
+        <div class="lg:col-span-6 flex flex-col gap-6" data-aos="fade-left">
+          <p class="text-text-secondary text-base md:text-lg leading-relaxed font-body" id="region-desc">
+            Núi non hùng vĩ, ruộng bậc thang xanh ngắt, văn hóa dân tộc đa dạng và ẩm thực phong phú mang đậm nét văn hiến Kinh kỳ.
+          </p>
+          <div class="grid grid-cols-2 gap-4" id="region-chips">
+            <span class="px-5 py-4 rounded-2xl bg-white border border-border-light text-sm font-semibold text-text flex items-center gap-3 shadow-card"><i data-lucide="map-pin" class="w-4.5 h-4.5 text-primary"></i> Hà Nội</span>
+            <span class="px-5 py-4 rounded-2xl bg-white border border-border-light text-sm font-semibold text-text flex items-center gap-3 shadow-card"><i data-lucide="map-pin" class="w-4.5 h-4.5 text-primary"></i> Vịnh Hạ Long</span>
+            <span class="px-5 py-4 rounded-2xl bg-white border border-border-light text-sm font-semibold text-text flex items-center gap-3 shadow-card"><i data-lucide="map-pin" class="w-4.5 h-4.5 text-primary"></i> Sa Pa</span>
+            <span class="px-5 py-4 rounded-2xl bg-white border border-border-light text-sm font-semibold text-text flex items-center gap-3 shadow-card"><i data-lucide="map-pin" class="w-4.5 h-4.5 text-primary"></i> Hà Giang</span>
+          </div>
+          <button id="region-cta-btn" onclick="openBookingModal('Tour Khám Phá Vùng Miền', '7500000')" class="ripple-btn self-start px-8 py-3.5 rounded-full bg-emerald-600 text-white text-xs font-bold uppercase tracking-widest hover:bg-emerald-700 transition-all duration-300 shadow-md shadow-emerald-600/10">Khám phá vùng miền</button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 6. Seasonal Nature Wheel -->
+  <section id="seasonal" class="py-28 bg-bg">
+    <div class="max-w-[1320px] mx-auto px-6">
+      <div class="max-w-2xl mx-auto flex flex-col items-center gap-3 mb-16 text-center" data-aos="fade-up">
+        <span class="px-5 py-1.5 rounded-full bg-primary/8 text-primary text-xs font-bold uppercase tracking-wider font-heading" data-translate="seasonal.eyebrow">Tour theo mùa</span>
+        <h2 class="font-heading text-3xl md:text-[42px] font-extrabold text-text leading-tight" data-translate="seasonal.title">Du Lịch Theo Mùa</h2>
+      </div>
+
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+        <!-- Spring -->
+        <div onclick="openBookingModal('Du lịch Mùa Xuân', '4200000')" class="group relative h-[420px] rounded-[32px] overflow-hidden cursor-pointer shadow-card hover:-translate-y-2 hover:shadow-hover hover:border-pinkRose/30 border border-transparent transition-all duration-700" data-aos="fade-up">
+          <img src="images/mocchau-spring.png" alt="Spring" class="absolute inset-0 w-full h-full object-cover group-hover:scale-105 transition-transform duration-700">
+          <div class="absolute inset-0 bg-gradient-to-t from-black/85 via-black/25 to-transparent"></div>
+          <div class="absolute top-5 left-5 px-5 py-1.5 rounded-full bg-pinkRose text-white text-[10px] font-bold uppercase tracking-widest shadow-md">Tháng 2 - 4</div>
+          <span class="absolute top-5 right-5 text-4xl font-extrabold text-white/10 font-heading">01</span>
+          <div class="absolute bottom-0 left-0 right-0 p-6 flex flex-col gap-2 text-left">
+            <h3 class="font-heading text-xl font-extrabold text-pink-300" data-translate="spring">Mùa Xuân</h3>
+            <p class="text-white/70 text-xs leading-relaxed">Mộc Châu ngập tràn hoa mận trắng rực rỡ sắc màu Tây Bắc.</p>
+          </div>
+        </div>
+        <!-- Summer -->
+        <div onclick="openBookingModal('Du lịch Mùa Hè', '4900000')" class="group relative h-[420px] rounded-[32px] overflow-hidden cursor-pointer shadow-card hover:-translate-y-2 hover:shadow-hover hover:border-skyBlue/30 border border-transparent transition-all duration-700" data-aos="fade-up" data-aos-delay="100">
+          <img src="images/phuquoc.png" alt="Summer" class="absolute inset-0 w-full h-full object-cover group-hover:scale-105 transition-transform duration-700">
+          <div class="absolute inset-0 bg-gradient-to-t from-black/85 via-black/25 to-transparent"></div>
+          <div class="absolute top-5 left-5 px-5 py-1.5 rounded-full bg-skyBlue text-white text-[10px] font-bold uppercase tracking-widest shadow-md">Tháng 5 - 7</div>
+          <span class="absolute top-5 right-5 text-4xl font-extrabold text-white/10 font-heading">02</span>
+          <div class="absolute bottom-0 left-0 right-0 p-6 flex flex-col gap-2 text-left">
+            <h3 class="font-heading text-xl font-extrabold text-sky-300" data-translate="summer">Mùa Hè</h3>
+            <p class="text-white/70 text-xs leading-relaxed">Làn nước mát lạnh ngập tràn nắng biển ấm tại đảo Phú Quốc.</p>
+          </div>
+        </div>
+        <!-- Autumn -->
+        <div onclick="openBookingModal('Du lịch Mùa Thu', '4600000')" class="group relative h-[420px] rounded-[32px] overflow-hidden cursor-pointer shadow-card hover:-translate-y-2 hover:shadow-hover hover:border-amberGold/30 border border-transparent transition-all duration-700" data-aos="fade-up" data-aos-delay="200">
+          <img src="images/sapa.png" alt="Autumn" class="absolute inset-0 w-full h-full object-cover group-hover:scale-105 transition-transform duration-700">
+          <div class="absolute inset-0 bg-gradient-to-t from-black/85 via-black/25 to-transparent"></div>
+          <div class="absolute top-5 left-5 px-5 py-1.5 rounded-full bg-amberGold text-white text-[10px] font-bold uppercase tracking-widest shadow-md">Tháng 8 - 10</div>
+          <span class="absolute top-5 right-5 text-4xl font-extrabold text-white/10 font-heading">03</span>
+          <div class="absolute bottom-0 left-0 right-0 p-6 flex flex-col gap-2 text-left">
+            <h3 class="font-heading text-xl font-extrabold text-amber-300" data-translate="autumn">Mùa Thu</h3>
+            <p class="text-white/70 text-xs leading-relaxed">Ruộng bậc thang óng ả màu lúa chín ngập thung lũng Sa Pa.</p>
+          </div>
+        </div>
+        <!-- Winter -->
+        <div onclick="openBookingModal('Du lịch Mùa Đông', '3900000')" class="group relative h-[420px] rounded-[32px] overflow-hidden cursor-pointer shadow-card hover:-translate-y-2 hover:shadow-hover hover:border-purpleIndigo/30 border border-transparent transition-all duration-700" data-aos="fade-up" data-aos-delay="300">
+          <img src="images/dalat-winter.png" alt="Winter" class="absolute inset-0 w-full h-full object-cover group-hover:scale-105 transition-transform duration-700">
+          <div class="absolute inset-0 bg-gradient-to-t from-black/85 via-black/25 to-transparent"></div>
+          <div class="absolute top-5 left-5 px-5 py-1.5 rounded-full bg-purpleIndigo text-white text-[10px] font-bold uppercase tracking-widest shadow-md">Tháng 11 - 1</div>
+          <span class="absolute top-5 right-5 text-4xl font-extrabold text-white/10 font-heading">04</span>
+          <div class="absolute bottom-0 left-0 right-0 p-6 flex flex-col gap-2 text-left">
+            <h3 class="font-heading text-xl font-extrabold text-indigo-300" data-translate="winter">Mùa Đông</h3>
+            <p class="text-white/70 text-xs leading-relaxed">Đà Lạt bảng lảng sương mù giăng kín các lối nhỏ đồi thông.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 7. Value Combos -->
+  <section id="combo" class="py-28 bg-bg-alt relative overflow-hidden">
+    <!-- Decorative backgrounds -->
+    <div class="absolute inset-0 z-0 opacity-30 bg-[radial-gradient(#3CB371_1px,transparent_1px)] [background-size:32px_32px] pointer-events-none"></div>
+    <div class="absolute -right-24 top-10 z-0 text-primary/5 opacity-[0.04] pointer-events-none transform rotate-45">
+      <i data-lucide="plane" class="w-96 h-96"></i>
+    </div>
+    <!-- Floating 2D Hot Air Balloon -->
+    <div class="absolute -right-16 top-24 z-0 pointer-events-none hidden xl:block opacity-25 hover:opacity-60 transition-opacity duration-500 animate-float select-none" style="animation-duration: 8s; animation-delay: 1s;">
+      <svg width="130" height="170" viewBox="0 0 100 130" fill="none">
+        <!-- Balloon Body -->
+        <path d="M50 10C27.9086 10 10 27.9086 10 50C10 65.5 22.5 82.5 50 95C77.5 82.5 90 65.5 90 50C90 27.9086 72.0914 10 50 10Z" fill="#FF7F50" stroke="#FF5722" stroke-width="2.5"/>
+        <!-- Stripes -->
+        <path d="M50 10C40 25 40 75 50 95" stroke="#FFE082" stroke-width="2"/>
+        <path d="M50 10C60 25 60 75 50 95" stroke="#FFE082" stroke-width="2"/>
+        <!-- Basket -->
+        <rect x="42" y="105" width="16" height="12" rx="2" fill="#8B4513"/>
+        <!-- Ropes -->
+        <line x1="45" y1="95" x2="45" y2="105" stroke="#555" stroke-width="1"/>
+        <line x1="55" y1="95" x2="55" y2="105" stroke="#555" stroke-width="1"/>
+      </svg>
+    </div>
+    <div class="max-w-[1320px] mx-auto px-6 relative z-10">
+      <div class="max-w-2xl mx-auto flex flex-col items-center gap-3 mb-16 text-center" data-aos="fade-up">
+        <span class="px-5 py-1.5 rounded-full bg-primary/8 text-primary text-xs font-bold uppercase tracking-wider font-heading" data-translate="combo.eyebrow">Combo tiết kiệm</span>
+        <h2 class="font-heading text-3xl md:text-[42px] font-extrabold text-text leading-tight" data-translate="combo.title">Combo Du Lịch Tiết Kiệm Hơn</h2>
+      </div>
+
+      <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+        <!-- Combo 1 -->
+        <div class="group bg-white rounded-[32px] overflow-hidden border border-border-light shadow-card hover:-translate-y-2.5 hover:shadow-hover transition-all duration-500 flex flex-col text-left" data-aos="fade-up">
+          <div class="relative h-60 overflow-hidden">
+            <img src="images/sapa.png" alt="North Combo" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700">
+            <div class="absolute top-4 left-4 z-10 px-3.5 py-1.5 rounded-full bg-coralRose text-white text-xs font-bold uppercase tracking-wider shadow-md">🔥 Giảm 30%</div>
+          </div>
+          <div class="p-6 md:p-8 flex flex-col gap-4 flex-grow">
+            <h3 class="font-heading text-lg md:text-xl font-extrabold text-text group-hover:text-primary transition-colors">Combo Tây Bắc Huyền Thoại</h3>
+            <p class="text-text-secondary text-sm leading-relaxed line-clamp-2">Khám phá trọn gói hành trình Tây Bắc bao gồm xe Limousine đưa đón cao cấp và 3 đêm nghỉ dưỡng tại Sapa.</p>
+            <div class="flex flex-col gap-2.5 pt-3 border-t border-border-light">
+              <span class="text-xs font-semibold text-text-secondary flex items-center gap-2.5"><i data-lucide="check" class="w-4 h-4 text-emerald-500"></i> Khách sạn 4 sao đẳng cấp</span>
+              <span class="text-xs font-semibold text-text-secondary flex items-center gap-2.5"><i data-lucide="check" class="w-4 h-4 text-emerald-500"></i> Hướng dẫn viên suốt chặng</span>
+            </div>
+            <div class="flex items-end justify-between pt-5 mt-auto border-t border-border-light gap-2">
+              <div class="flex flex-col min-w-0">
+                <span class="text-xs text-text-light line-through font-semibold price-val" data-price-vnd="16990000">16.990.000đ</span>
+                <span class="font-heading text-xl font-extrabold text-primary price-val" data-price-vnd="11990000">11.990.000đ</span>
+              </div>
+              <button onclick="openBookingModal('Combo Tây Bắc Huyền Thoại', '11990000')" class="shrink-0 whitespace-nowrap px-3 py-1.5 rounded-full bg-primary text-white text-[10px] sm:text-xs font-bold uppercase tracking-widest hover:bg-primary-dark transition-all duration-300" data-translate="ui.bookNow">Đặt ngay</button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Combo 2 -->
+        <div class="group bg-white rounded-[32px] overflow-hidden border border-border-light shadow-card hover:-translate-y-2.5 hover:shadow-hover transition-all duration-500 flex flex-col text-left" data-aos="fade-up" data-aos-delay="100">
+          <div class="relative h-60 overflow-hidden">
+            <img src="images/hoian.png" alt="Central Combo" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700">
+            <div class="absolute top-4 left-4 z-10 px-3.5 py-1.5 rounded-full bg-coralRose text-white text-xs font-bold uppercase tracking-wider shadow-md">🔥 Giảm 25%</div>
+          </div>
+          <div class="p-6 md:p-8 flex flex-col gap-4 flex-grow">
+            <h3 class="font-heading text-lg md:text-xl font-extrabold text-text group-hover:text-primary transition-colors">Combo Đà Nẵng – Hội An 4N3Đ</h3>
+            <p class="text-text-secondary text-sm leading-relaxed line-clamp-2">Tận hưởng dịch vụ nghỉ dưỡng cao cấp ven biển cùng cơ hội check-in Cầu Vàng, Bà Nà Hills.</p>
+            <div class="flex flex-col gap-2.5 pt-3 border-t border-border-light">
+              <span class="text-xs font-semibold text-text-secondary flex items-center gap-2.5"><i data-lucide="check" class="w-4 h-4 text-emerald-500"></i> Vé máy bay khứ hồi khép kín</span>
+              <span class="text-xs font-semibold text-text-secondary flex items-center gap-2.5"><i data-lucide="check" class="w-4 h-4 text-emerald-500"></i> Buffet sáng chuẩn 5 sao</span>
+            </div>
+            <div class="flex items-end justify-between pt-5 mt-auto border-t border-border-light gap-2">
+              <div class="flex flex-col min-w-0">
+                <span class="text-xs text-text-light line-through font-semibold price-val" data-price-vnd="8990000">8.990.000đ</span>
+                <span class="font-heading text-xl font-extrabold text-primary price-val" data-price-vnd="6490000">6.490.000đ</span>
+              </div>
+              <button onclick="openBookingModal('Combo Đà Nẵng – Hội An 4N3Đ', '6490000')" class="shrink-0 whitespace-nowrap px-3 py-1.5 rounded-full bg-primary text-white text-[10px] sm:text-xs font-bold uppercase tracking-widest hover:bg-primary-dark transition-all duration-300" data-translate="ui.bookNow">Đặt ngay</button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Combo 3 -->
+        <div class="group bg-white rounded-[32px] overflow-hidden border border-border-light shadow-card hover:-translate-y-2.5 hover:shadow-hover transition-all duration-500 flex flex-col text-left" data-aos="fade-up" data-aos-delay="200">
+          <div class="relative h-60 overflow-hidden">
+            <img src="images/phuquoc.png" alt="South Combo" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700">
+            <div class="absolute top-4 left-4 z-10 px-3.5 py-1.5 rounded-full bg-coralRose text-white text-xs font-bold uppercase tracking-wider shadow-md">🔥 Giảm 20%</div>
+          </div>
+          <div class="p-6 md:p-8 flex flex-col gap-4 flex-grow">
+            <h3 class="font-heading text-lg md:text-xl font-extrabold text-text group-hover:text-primary transition-colors">Combo Resort Vinpearl Phú Quốc</h3>
+            <p class="text-text-secondary text-sm leading-relaxed line-clamp-2">Nghỉ mát 3 ngày 2 đêm tại Resort cao cấp, miễn phí vé vào cổng VinWonders & Safari.</p>
+            <div class="flex flex-col gap-2.5 pt-3 border-t border-border-light">
+              <span class="text-xs font-semibold text-text-secondary flex items-center gap-2.5"><i data-lucide="check" class="w-4 h-4 text-emerald-500"></i> Resort Vinpearl đẳng cấp</span>
+              <span class="text-xs font-semibold text-text-secondary flex items-center gap-2.5"><i data-lucide="check" class="w-4 h-4 text-emerald-500"></i> Vé trọn gói vui chơi safari</span>
+            </div>
+            <div class="flex items-end justify-between pt-5 mt-auto border-t border-border-light gap-2">
+              <div class="flex flex-col min-w-0">
+                <span class="text-xs text-text-light line-through font-semibold price-val" data-price-vnd="6200000">6.200.000đ</span>
+                <span class="font-heading text-xl font-extrabold text-primary price-val" data-price-vnd="4990000">4.990.000đ</span>
+              </div>
+              <button onclick="openBookingModal('Combo Resort Vinpearl Phú Quốc', '4990000')" class="shrink-0 whitespace-nowrap px-3 py-1.5 rounded-full bg-primary text-white text-[10px] sm:text-xs font-bold uppercase tracking-widest hover:bg-primary-dark transition-all duration-300" data-translate="ui.bookNow">Đặt ngay</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 8. Experiences Section -->
+  <section class="py-28 bg-[#FCF8F2] relative overflow-hidden">
+    <!-- Decorative Warm Rays Grid -->
+    <div class="absolute inset-0 z-0 opacity-20 bg-[radial-gradient(#F59E0B_1px,transparent_1px)] [background-size:28px_28px] pointer-events-none"></div>
+    <div class="absolute -right-20 top-1/4 z-0 text-amberGold/5 opacity-[0.03] pointer-events-none transform rotate-45 select-none">
+      <i data-lucide="sun" class="w-[450px] h-[450px]"></i>
+    </div>
+    <div class="max-w-[1320px] mx-auto px-6 relative z-10">
+      <div class="max-w-2xl mx-auto flex flex-col items-center gap-3 mb-16 text-center" data-aos="fade-up">
+        <span class="px-5 py-1.5 rounded-full bg-primary/8 text-primary text-xs font-bold uppercase tracking-wider font-heading" data-translate="experiences.eyebrow">Trải nghiệm đặc sắc</span>
+        <h2 class="font-heading text-3xl md:text-[42px] font-extrabold text-text leading-tight" data-translate="experiences.title">Trải Nghiệm Không Thể Quên</h2>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+        <!-- Exp 1 -->
+        <div class="group bg-white rounded-[32px] overflow-hidden border border-border-light shadow-card hover:-translate-y-2 hover:shadow-hover transition-all duration-500 flex flex-col text-left" data-aos="fade-up">
+          <div class="relative h-56 overflow-hidden">
+            <img src="images/halong.png" alt="Kayaking" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
+            <span class="absolute top-4 left-4 px-3 py-1 rounded-full bg-skyBlue text-white text-[9px] font-bold uppercase tracking-widest font-heading shadow-sm">Mạo hiểm</span>
+          </div>
+          <div class="p-6 md:p-8 flex flex-col gap-3 flex-grow">
+            <h3 class="font-heading font-extrabold text-lg text-text group-hover:text-primary transition-colors">Chèo thuyền Kayak Vịnh Hạ Long</h3>
+            <p class="text-text-secondary text-sm leading-relaxed">Tự do chèo thuyền kayak len lỏi giữa hàng nghìn đảo đá vôi, ngắm những hang động hoang sơ kỳ bí.</p>
+            <div class="flex items-center justify-between pt-4 mt-auto border-t border-border-light">
+              <span class="text-xs font-semibold text-text-secondary flex items-center gap-1.5"><i data-lucide="clock" class="w-4 h-4 text-primary"></i> 3-4 giờ</span>
+              <span class="text-base font-extrabold text-primary price-val" data-price-vnd="590000">590.000đ</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Exp 2 -->
+        <div class="group bg-white rounded-[32px] overflow-hidden border border-border-light shadow-card hover:-translate-y-2 hover:shadow-hover transition-all duration-500 flex flex-col text-left" data-aos="fade-up" data-aos-delay="100">
+          <div class="relative h-56 overflow-hidden">
+            <img src="images/sapa.png" alt="Trek" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
+            <span class="absolute top-4 left-4 px-3 py-1 rounded-full bg-emerald-600 text-white text-[9px] font-bold uppercase tracking-widest font-heading shadow-sm">Khám phá</span>
+          </div>
+          <div class="p-6 md:p-8 flex flex-col gap-3 flex-grow">
+            <h3 class="font-heading font-extrabold text-lg text-text group-hover:text-primary transition-colors">Trekking Bản Làng Sapa</h3>
+            <p class="text-text-secondary text-sm leading-relaxed">Thăm bản Cát Cát, Tả Van, trải nghiệm lưu trú nhà sàn và ngắm nhìn hoàng hôn bên thung lũng.</p>
+            <div class="flex items-center justify-between pt-4 mt-auto border-t border-border-light">
+              <span class="text-xs font-semibold text-text-secondary flex items-center gap-1.5"><i data-lucide="clock" class="w-4 h-4 text-primary"></i> 1 ngày</span>
+              <span class="text-base font-extrabold text-primary price-val" data-price-vnd="490000">490.000đ</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Exp 3 -->
+        <div class="group bg-white rounded-[32px] overflow-hidden border border-border-light shadow-card hover:-translate-y-2 hover:shadow-hover transition-all duration-500 flex flex-col text-left" data-aos="fade-up" data-aos-delay="200">
+          <div class="relative h-56 overflow-hidden">
+            <img src="images/hoian-cooking.png" alt="Cooking" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
+            <span class="absolute top-4 left-4 px-3 py-1 rounded-full bg-coralRose text-white text-[9px] font-bold uppercase tracking-widest font-heading shadow-sm">Ẩm thực</span>
+          </div>
+          <div class="p-6 md:p-8 flex flex-col gap-3 flex-grow">
+            <h3 class="font-heading font-extrabold text-lg text-text group-hover:text-primary transition-colors">Khóa Học Nấu Ăn Hội An</h3>
+            <p class="text-text-secondary text-sm leading-relaxed">Đến chợ địa phương cùng đầu bếp chuyên nghiệp, học cách tự tay chế biến món Cao Lầu, Mì Quảng.</p>
+            <div class="flex items-center justify-between pt-4 mt-auto border-t border-border-light">
+              <span class="text-xs font-semibold text-text-secondary flex items-center gap-1.5"><i data-lucide="clock" class="w-4 h-4 text-primary"></i> 4 giờ</span>
+              <span class="text-base font-extrabold text-primary price-val" data-price-vnd="790000">790.000đ</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 9. Why Choose Us -->
+  <section id="why-us" class="py-28 bg-bg-alt relative overflow-hidden">
+
+
+    <div class="max-w-[1320px] mx-auto px-6 relative z-10">
+      <div class="max-w-2xl mx-auto flex flex-col items-center gap-3 mb-16 text-center" data-aos="fade-up">
+        <span class="px-5 py-1.5 rounded-full bg-primary/8 text-primary text-xs font-bold uppercase tracking-wider font-heading" data-translate="whyUs.eyebrow">Tại sao chọn chúng tôi</span>
+        <h2 class="font-heading text-3xl md:text-[42px] font-extrabold text-text leading-tight" data-translate="whyUs.title">Lý Do Hàng Nghìn Khách Hàng Tin Tưởng</h2>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+        <div class="group glass-strong rounded-[32px] p-6 md:p-8 lg:p-10 hover:-translate-y-2 hover:shadow-hover hover:border-primary/10 transition-all duration-500 text-left" data-aos="fade-up">
+          <div class="w-16 h-16 rounded-[24px] bg-[#E8F5E9] flex items-center justify-center text-primary mb-8 group-hover:bg-primary group-hover:text-white group-hover:scale-110 transition-all duration-500 shadow-sm">
+            <i data-lucide="users" class="w-7 h-7"></i>
+          </div>
+          <h3 class="font-heading font-extrabold text-xl text-text mb-4" data-translate="why.guide">Chuyên gia bản địa</h3>
+          <p class="text-text-secondary text-sm leading-relaxed">Đội ngũ hướng dẫn viên giàu kinh nghiệm, thấu hiểu sâu sắc văn hóa địa lý của từng vùng miền.</p>
+        </div>
+
+        <div class="group glass-strong rounded-[32px] p-6 md:p-8 lg:p-10 hover:-translate-y-2 hover:shadow-hover hover:border-primary/10 transition-all duration-500 text-left" data-aos="fade-up" data-aos-delay="100">
+          <div class="w-16 h-16 rounded-[24px] bg-amber-50 flex items-center justify-center text-amberGold mb-8 group-hover:bg-amberGold group-hover:text-white group-hover:scale-110 transition-all duration-500 shadow-sm">
+            <i data-lucide="award" class="w-7 h-7"></i>
+          </div>
+          <h3 class="font-heading font-extrabold text-xl text-text mb-4" data-translate="why.quality">Dịch vụ chuẩn 5★</h3>
+          <p class="text-text-secondary text-sm leading-relaxed">Cam kết mọi phương tiện di chuyển, phòng khách sạn và món ăn được thẩm định kỹ lượng.</p>
+        </div>
+
+        <div class="group glass-strong rounded-[32px] p-6 md:p-8 lg:p-10 hover:-translate-y-2 hover:shadow-hover hover:border-primary/10 transition-all duration-500 text-left" data-aos="fade-up" data-aos-delay="200">
+          <div class="w-16 h-16 rounded-[24px] bg-sky-50 flex items-center justify-center text-skyBlue mb-8 group-hover:bg-skyBlue group-hover:text-white group-hover:scale-110 transition-all duration-500 shadow-sm">
+            <i data-lucide="headphones" class="w-7 h-7"></i>
+          </div>
+          <h3 class="font-heading font-extrabold text-xl text-text mb-4" data-translate="why.support">Hỗ trợ 24/7 chuyên nghiệp</h3>
+          <p class="text-text-secondary text-sm leading-relaxed">Đội ngũ tư vấn viên phản hồi tức thì, sẵn lòng trợ giúp các sự cố của quý khách mọi lúc mọi nơi.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 10. Booking Steps -->
+  <section class="py-28 bg-gradient-to-br from-[#EBF5EE] to-[#DCEDE2] relative overflow-hidden">
+    <!-- Decorative Dots -->
+    <div class="absolute inset-0 z-0 opacity-[0.06] bg-[radial-gradient(#2E8B57_2px,transparent_2px)] [background-size:20px_20px] pointer-events-none"></div>
+    <div class="max-w-[1320px] mx-auto px-6">
+      <div class="max-w-2xl mx-auto flex flex-col items-center gap-3 mb-20 text-center" data-aos="fade-up">
+        <span class="px-5 py-1.5 rounded-full bg-primary/8 text-primary text-xs font-bold uppercase tracking-wider font-heading" data-translate="process.eyebrow">Quy trình đặt tour</span>
+        <h2 class="font-heading text-3xl md:text-[42px] font-extrabold text-text leading-tight" data-translate="process.title">Đặt Tour Dễ Dàng Chỉ 4 Bước</h2>
+      </div>
+
+      <div class="relative">
+        <!-- Connecting Line -->
+        <div class="hidden lg:block absolute top-28 left-[12%] right-[12%] h-[2px] bg-gradient-to-r from-primary/10 via-primary/50 to-primary/10 z-0"></div>
+        
+        <div class="grid grid-cols-1 sm:grid-cols-4 gap-8 relative z-10">
+          <!-- Step 1 -->
+          <div class="glass-strong rounded-[32px] p-8 shadow-card border border-border-light hover:-translate-y-2 hover:shadow-hover hover:border-primary/20 transition-all duration-500 flex flex-col items-center text-center gap-5 relative z-10" data-aos="fade-up" data-aos-delay="0">
+            <div class="relative">
+              <div class="w-20 h-20 rounded-full bg-primary/5 border-2 border-primary/20 flex items-center justify-center shadow-sm group cursor-pointer">
+                <i data-lucide="search" class="w-7 h-7 text-primary transition-transform group-hover:scale-110"></i>
+              </div>
+              <span class="absolute -top-1 -right-1 w-7 h-7 rounded-full bg-primary text-white text-xs font-bold flex items-center justify-center shadow-md">1</span>
+            </div>
+            <h3 class="font-heading font-extrabold text-base text-text">Tìm kiếm tour lý tưởng</h3>
+            <p class="text-text-secondary text-xs leading-relaxed">Khám phá danh sách điểm đến. Sử dụng bộ lọc thông minh để tìm kiếm lịch trình phù hợp với ngân sách và sở thích cá nhân.</p>
+          </div>
+
+          <!-- Step 2 -->
+          <div class="glass-strong rounded-[32px] p-8 shadow-card border border-border-light hover:-translate-y-2 hover:shadow-hover hover:border-primary/20 transition-all duration-500 flex flex-col items-center text-center gap-5 relative z-10" data-aos="fade-up" data-aos-delay="150">
+            <div class="relative">
+              <div class="w-20 h-20 rounded-full bg-primary/5 border-2 border-primary/20 flex items-center justify-center shadow-sm group cursor-pointer">
+                <i data-lucide="calendar-check" class="w-7 h-7 text-primary transition-transform group-hover:scale-110"></i>
+              </div>
+              <span class="absolute -top-1 -right-1 w-7 h-7 rounded-full bg-primary text-white text-xs font-bold flex items-center justify-center shadow-md">2</span>
+            </div>
+            <h3 class="font-heading font-extrabold text-base text-text">Đặt dịch vụ tùy biến</h3>
+            <p class="text-text-secondary text-xs leading-relaxed">Điền thông tin cá nhân bảo mật. Dễ dàng bổ sung các tùy chọn tiện ích đi kèm như phòng đơn, xe đưa đón cao cấp hay bảo hiểm.</p>
+          </div>
+
+          <!-- Step 3 -->
+          <div class="glass-strong rounded-[32px] p-8 shadow-card border border-border-light hover:-translate-y-2 hover:shadow-hover hover:border-primary/20 transition-all duration-500 flex flex-col items-center text-center gap-5 relative z-10" data-aos="fade-up" data-aos-delay="300">
+            <div class="relative">
+              <div class="w-20 h-20 rounded-full bg-primary/5 border-2 border-primary/20 flex items-center justify-center shadow-sm group cursor-pointer">
+                <i data-lucide="credit-card" class="w-7 h-7 text-primary transition-transform group-hover:scale-110"></i>
+              </div>
+              <span class="absolute -top-1 -right-1 w-7 h-7 rounded-full bg-primary text-white text-xs font-bold flex items-center justify-center shadow-md">3</span>
+            </div>
+            <h3 class="font-heading font-extrabold text-base text-text">Thanh toán bảo mật</h3>
+            <p class="text-text-secondary text-xs leading-relaxed">Xác nhận thanh toán trực tuyến an toàn 100% qua cổng bảo mật cao cấp với đa dạng phương thức (chuyển khoản, thẻ, ví điện tử).</p>
+          </div>
+
+          <!-- Step 4 -->
+          <div class="glass-strong rounded-[32px] p-8 shadow-card border border-border-light hover:-translate-y-2 hover:shadow-hover hover:border-primary/20 transition-all duration-500 flex flex-col items-center text-center gap-5 relative z-10" data-aos="fade-up" data-aos-delay="450">
+            <div class="relative">
+              <div class="w-20 h-20 rounded-full bg-primary/5 border-2 border-primary/20 flex items-center justify-center shadow-sm group cursor-pointer">
+                <i data-lucide="plane" class="w-7 h-7 text-primary transition-transform group-hover:scale-110"></i>
+              </div>
+              <span class="absolute -top-1 -right-1 w-7 h-7 rounded-full bg-primary text-white text-xs font-bold flex items-center justify-center shadow-md">4</span>
+            </div>
+            <h3 class="font-heading font-extrabold text-base text-text">Trải nghiệm kỳ nghỉ</h3>
+            <p class="text-text-secondary text-xs leading-relaxed">Nhận mã vé điện tử tức thời kèm cẩm nang chuẩn bị hành lý chi tiết. Hướng dẫn viên riêng liên hệ trước giờ đi để hỗ trợ trọn vẹn.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 11. Stats Section -->
+  <section class="relative py-24 overflow-hidden text-white">
+    <div class="absolute inset-0 bg-gradient-to-r from-primary via-secondary to-accent animate-gradient z-0"></div>
+    <div class="absolute inset-0 z-[1] opacity-[0.08]" style="background-image: radial-gradient(circle at 1px 1px, white 1px, transparent 0); background-size: 30px 30px;"></div>
+    
+    <div class="max-w-[1320px] mx-auto px-6 relative z-10">
+      <div class="grid grid-cols-2 md:grid-cols-4 gap-8 md:gap-12 text-center" data-aos="fade-up">
+        <div class="flex flex-col gap-2 items-center">
+          <div class="w-14 h-14 rounded-2xl bg-white/10 flex items-center justify-center mb-3 border border-white/10 backdrop-blur-md">
+            <i data-lucide="compass" class="w-6 h-6"></i>
+          </div>
+          <span class="stat-number text-3xl md:text-5xl font-extrabold font-heading tracking-tight" data-target="1000" data-suffix="+">0</span>
+          <span class="text-xs uppercase font-bold tracking-widest text-white/80" data-translate="stats.tours">Tour du lịch</span>
+        </div>
+
+        <div class="flex flex-col gap-2 items-center">
+          <div class="w-14 h-14 rounded-2xl bg-white/10 flex items-center justify-center mb-3 border border-white/10 backdrop-blur-md">
+            <i data-lucide="users" class="w-6 h-6"></i>
+          </div>
+          <span class="stat-number text-3xl md:text-5xl font-extrabold font-heading tracking-tight" data-target="50000" data-suffix="+">0</span>
+          <span class="text-xs uppercase font-bold tracking-widest text-white/80" data-translate="stats.customers">Khách hàng hài lòng</span>
+        </div>
+
+        <div class="flex flex-col gap-2 items-center">
+          <div class="w-14 h-14 rounded-2xl bg-white/10 flex items-center justify-center mb-3 border border-white/10 backdrop-blur-md">
+            <i data-lucide="map-pin" class="w-6 h-6"></i>
+          </div>
+          <span class="stat-number text-3xl md:text-5xl font-extrabold font-heading tracking-tight" data-target="100" data-suffix="+">0</span>
+          <span class="text-xs uppercase font-bold tracking-widest text-white/80" data-translate="stats.destinations">Điểm đến</span>
+        </div>
+
+        <div class="flex flex-col gap-2 items-center">
+          <div class="w-14 h-14 rounded-2xl bg-white/10 flex items-center justify-center mb-3 border border-white/10 backdrop-blur-md">
+            <i data-lucide="star" class="w-6 h-6"></i>
+          </div>
+          <span class="stat-number text-3xl md:text-5xl font-extrabold font-heading tracking-tight" data-target="4.9" data-suffix="★">0</span>
+          <span class="text-xs uppercase font-bold tracking-widest text-white/80" data-translate="stats.rating">Đánh giá</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 13. Blog Section -->
+  <section id="blog" class="py-28 bg-gradient-to-tr from-[#FFF7F5] to-[#FDF0EB] relative overflow-hidden">
+    <!-- Decorative grid & leaves -->
+    <div class="absolute inset-0 z-0 opacity-20 bg-[radial-gradient(#FF6B6B_1px,transparent_1px)] [background-size:24px_24px] pointer-events-none"></div>
+    <div class="absolute -left-20 bottom-10 z-0 text-coralRose/5 opacity-[0.04] pointer-events-none transform -rotate-12 select-none">
+      <i data-lucide="flower-2" class="w-96 h-96"></i>
+    </div>
+    <div class="max-w-[1320px] mx-auto px-6 relative z-10">
+      <div class="flex flex-col md:flex-row md:items-end justify-between mb-16 gap-6" data-aos="fade-up">
+        <div class="flex flex-col gap-3">
+          <span class="px-5 py-1.5 rounded-full bg-primary/8 text-primary text-xs font-bold uppercase tracking-wider self-start font-heading" data-translate="blog.eyebrow">Blog du lịch</span>
+          <h2 class="font-heading text-3xl md:text-[42px] font-extrabold text-text leading-tight" data-translate="blog.title">Cẩm Nang Du Lịch Việt Nam</h2>
+        </div>
+        <button class="flex items-center gap-2 text-primary font-heading font-bold text-sm hover:gap-3.5 transition-all shrink-0">
+          <span data-translate="ui.viewAll">Xem tất cả</span>
+          <i data-lucide="arrow-right" class="w-4 h-4"></i>
+        </button>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+        <!-- Post 1 -->
+        <div class="group bg-white rounded-[32px] overflow-hidden border border-border-light shadow-card hover:-translate-y-2 hover:shadow-hover transition-all duration-500 flex flex-col text-left card-shimmer" data-aos="fade-up">
+          <div class="relative h-52 overflow-hidden">
+            <img src="images/hoian-cooking.png" alt="Food" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700">
+            <span class="absolute top-4 left-4 px-3 py-1 rounded-full bg-coralRose text-white text-[9px] font-bold uppercase tracking-widest font-heading shadow-md">Ẩm thực</span>
+          </div>
+          <div class="p-6 md:p-8 flex flex-col gap-3 flex-grow">
+            <span class="text-xs font-semibold text-text-secondary font-body">15 Tháng 12, 2024</span>
+            <h3 class="font-heading font-extrabold text-lg text-text group-hover:text-primary transition-colors leading-snug line-clamp-2">Top 10 món ăn đường phố nhất định phải thử tại Hà Nội</h3>
+            <p class="text-text-secondary text-sm leading-relaxed line-clamp-2">Khám phá nét tinh túy của ẩm thực phố cổ từ phở gánh, bún chả đến hương vị cà phê trứng nổi danh.</p>
+            <button onclick="openBlogModal('Top 10 món ăn đường phố nhất định phải thử tại Hà Nội', 'Ẩm thực', '15 Tháng 12, 2024', 'Hà Nội không chỉ nổi tiếng với những danh lam thắng cảnh cổ kính mà còn là thiên đường ẩm thực đường phố được báo chí quốc tế hết lời ca ngợi. Khám phá nét tinh túy của ẩm thực phố cổ từ phở gánh thơm lừng đầu ngõ, bún chả nướng than hoa đậm vị đến hương vị cà phê trứng béo ngậy thơm ngon nổi danh toàn cầu.', 'images/hoian-cooking.png')" class="flex items-center gap-1.5 text-xs font-bold text-primary hover:text-primary-dark transition-colors mt-auto pt-4 border-t border-border-light self-start">
+              <span data-translate="blog.readMore">Đọc thêm</span>
+              <i data-lucide="arrow-right" class="w-3.5 h-3.5"></i>
+            </button>
+          </div>
+        </div>
+
+        <!-- Post 2 -->
+        <div class="group bg-white rounded-[32px] overflow-hidden border border-border-light shadow-card hover:-translate-y-2 hover:shadow-hover transition-all duration-500 flex flex-col text-left card-shimmer" data-aos="fade-up" data-aos-delay="100">
+          <div class="relative h-52 overflow-hidden">
+            <img src="images/hagiang.png" alt="Ha Giang" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700">
+            <span class="absolute top-4 left-4 px-3 py-1 rounded-full bg-skyBlue text-white text-[9px] font-bold uppercase tracking-widest font-heading shadow-md">Kinh nghiệm</span>
+          </div>
+          <div class="p-6 md:p-8 flex flex-col gap-3 flex-grow">
+            <span class="text-xs font-semibold text-text-secondary font-body">10 Tháng 12, 2024</span>
+            <h3 class="font-heading font-extrabold text-lg text-text group-hover:text-primary transition-colors leading-snug line-clamp-2">Cẩm nang chinh phục đèo Mã Pì Lèng an toàn cho phượt thủ</h3>
+            <p class="text-text-secondary text-sm leading-relaxed line-clamp-2">Những kinh nghiệm lái xe và kỹ năng cần có khi băng qua cung đường đèo hùng vĩ bậc nhất Hà Giang.</p>
+            <button onclick="openBlogModal('Cẩm nang chinh phục đèo Mã Pì Lèng an toàn cho phượt thủ', 'Kinh nghiệm', '10 Tháng 12, 2024', 'Đèo Mã Pì Lèng được ví như một trong tứ đại định đèo hiểm trở nhất miền Bắc Việt Nam. Để chinh phục cung đường tuyệt đẹp với những vách đá thẳng đứng và thung lũng sông Nho Quế xanh ngắt phía dưới, các phượt thủ cần chuẩn bị kỹ năng kiểm soát phanh, chọn khung giờ khởi hành tránh sương mù dày đặc và lựa chọn xe số/xe côn đảm bảo an toàn tuyệt đối.', 'images/hagiang.png')" class="flex items-center gap-1.5 text-xs font-bold text-primary hover:text-primary-dark transition-colors mt-auto pt-4 border-t border-border-light self-start">
+              <span data-translate="blog.readMore">Đọc thêm</span>
+              <i data-lucide="arrow-right" class="w-3.5 h-3.5"></i>
+            </button>
+          </div>
+        </div>
+
+        <!-- Post 3 -->
+        <div class="group bg-white rounded-[32px] overflow-hidden border border-border-light shadow-card hover:-translate-y-2 hover:shadow-hover transition-all duration-500 flex flex-col text-left card-shimmer" data-aos="fade-up" data-aos-delay="200">
+          <div class="relative h-52 overflow-hidden">
+            <img src="images/sapa.png" alt="Sapa" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700">
+            <span class="absolute top-4 left-4 px-3 py-1 rounded-full bg-emerald-600 text-white text-[9px] font-bold uppercase tracking-widest font-heading shadow-md">Văn hóa</span>
+          </div>
+          <div class="p-6 md:p-8 flex flex-col gap-3 flex-grow">
+            <span class="text-xs font-semibold text-text-secondary font-body">05 Tháng 12, 2024</span>
+            <h3 class="font-heading font-extrabold text-lg text-text group-hover:text-primary transition-colors leading-snug line-clamp-2">Những trải nghiệm homestay bản làng độc đáo tại Tây Bắc</h3>
+            <p class="text-text-secondary text-sm leading-relaxed line-clamp-2">Chia sẻ trải nghiệm sống và sinh hoạt cùng các gia dịch đồng bào dân tộc thiểu số miền cao.</p>
+            <button onclick="openBlogModal('Những trải nghiệm homestay bản làng độc đáo tại Tây Bắc', 'Văn hóa', '05 Tháng 12, 2024', 'Tránh xa những ồn ào của phố thị, dịch vụ lưu trú homestay tại các bản làng Sa Pa mang đến cơ hội vàng giúp bạn hòa mình trọn vẹn vào cuộc sống dân dã của người dân tộc H’Mông, Dao đỏ. Bạn sẽ được thưởng thức các món ăn nướng đặc sản núi rừng, trải nghiệm nhuộm chàm dệt vải thủ công và lắng nghe những câu chuyện văn hóa truyền thống bên bếp lửa bập bùng.', 'images/sapa.png')" class="flex items-center gap-1.5 text-xs font-bold text-primary hover:text-primary-dark transition-colors mt-auto pt-4 border-t border-border-light self-start">
+              <span data-translate="blog.readMore">Đọc thêm</span>
+              <i data-lucide="arrow-right" class="w-3.5 h-3.5"></i>
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 13.5 Customer Testimonials Marquee -->
+  <section class="py-24 bg-bg overflow-hidden border-t border-border-light relative">
+    <div class="max-w-[1320px] mx-auto px-6 mb-16 text-center flex flex-col items-center gap-4" data-aos="fade-up">
+      <span class="text-[10px] uppercase tracking-widest font-bold text-accent bg-primary/10 px-4 py-1.5 rounded-full border border-primary/20">Nhật ký hành trình</span>
+      <h2 class="font-heading text-3xl md:text-[40px] font-extrabold text-text leading-tight">Khách hàng nói gì về chúng tôi</h2>
+      <p class="text-text-secondary text-sm md:text-base max-w-2xl mt-2">Những kỷ niệm đẹp và trải nghiệm thực tế từ hàng ngàn du khách đã tin tưởng đồng hành cùng Vietnam Tours trên mọi miền Tổ quốc.</p>
+    </div>
+
+    <!-- Infinite Marquee Slider -->
+    <div class="w-full relative overflow-hidden flex pause-on-hover">
+      <!-- Gradient masks for smooth fading at edges -->
+      <div class="absolute left-0 top-0 w-16 md:w-48 h-full bg-gradient-to-r from-bg to-transparent z-10 pointer-events-none"></div>
+      <div class="absolute right-0 top-0 w-16 md:w-48 h-full bg-gradient-to-l from-bg to-transparent z-10 pointer-events-none"></div>
+
+      <!-- Marquee Track (Double for seamless loop) -->
+      <div class="flex gap-6 items-center animate-marquee shrink-0 w-max cursor-grab active:cursor-grabbing px-3">
+        <!-- Original Set -->
+        <div class="w-[360px] md:w-[420px] p-8 glass-strong rounded-[32px] border border-border-light shadow-card flex flex-col gap-6 shrink-0 relative overflow-hidden group hover:-translate-y-2 transition-all duration-300">
+          <div class="absolute top-0 right-0 w-24 h-24 bg-primary/5 rounded-bl-full -mr-4 -mt-4 transition-transform group-hover:scale-150 duration-500"></div>
+          <i data-lucide="quote" class="absolute top-8 right-8 w-10 h-10 text-primary/10 group-hover:text-primary/20 transition-colors"></i>
+          
+          <div class="flex gap-1 text-amber-400">
+            <i data-lucide="star" class="w-4 h-4 fill-current"></i>
+            <i data-lucide="star" class="w-4 h-4 fill-current"></i>
+            <i data-lucide="star" class="w-4 h-4 fill-current"></i>
+            <i data-lucide="star" class="w-4 h-4 fill-current"></i>
+            <i data-lucide="star" class="w-4 h-4 fill-current"></i>
+          </div>
+          <p class="text-text text-sm font-medium leading-relaxed italic relative z-10">"Tour Vịnh Hạ Long 3N2Đ thực sự tuyệt vời! Hướng dẫn viên rất nhiệt tình, thức ăn trên du thuyền siêu ngon. Đặc biệt là trải nghiệm chèo thuyền kayak vào hang động rất đáng nhớ."</p>
+          <div class="flex items-center gap-4 mt-auto pt-4 border-t border-border-light relative z-10">
+            <img src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=150&q=80" alt="Avatar" class="w-12 h-12 rounded-full object-cover border-2 border-white shadow-md">
+            <div class="flex flex-col min-w-0">
+              <span class="font-heading font-extrabold text-sm text-text">Nguyễn Mai Phương</span>
+              <span class="text-[10px] uppercase font-bold text-primary tracking-wider mt-1">Khách hàng Hạ Long</span>
+            </div>
+          </div>
+        </div>
+        
+        <div class="w-[360px] md:w-[420px] p-8 glass-strong rounded-[32px] border border-border-light shadow-card flex flex-col gap-6 shrink-0 relative overflow-hidden group hover:-translate-y-2 transition-all duration-300">
+          <div class="absolute top-0 right-0 w-24 h-24 bg-skyBlue/5 rounded-bl-full -mr-4 -mt-4 transition-transform group-hover:scale-150 duration-500"></div>
+          <i data-lucide="quote" class="absolute top-8 right-8 w-10 h-10 text-skyBlue/10 group-hover:text-skyBlue/20 transition-colors"></i>
+          
+          <div class="flex gap-1 text-amber-400">
+            <i data-lucide="star" class="w-4 h-4 fill-current"></i>
+            <i data-lucide="star" class="w-4 h-4 fill-current"></i>
+            <i data-lucide="star" class="w-4 h-4 fill-current"></i>
+            <i data-lucide="star" class="w-4 h-4 fill-current"></i>
+            <i data-lucide="star" class="w-4 h-4 fill-current"></i>
+          </div>
+          <p class="text-text text-sm font-medium leading-relaxed italic relative z-10">"Tôi và gia đình đã có chuyến nghỉ dưỡng 5 sao ở Phú Quốc vô cùng trọn vẹn nhờ sự sắp xếp chuyên nghiệp của công ty. Vinpearl rất đẹp và các tiện ích miễn phí đều tuyệt vời."</p>
+          <div class="flex items-center gap-4 mt-auto pt-4 border-t border-border-light relative z-10">
+            <img src="https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?auto=format&fit=crop&w=150&q=80" alt="Avatar" class="w-12 h-12 rounded-full object-cover border-2 border-white shadow-md">
+            <div class="flex flex-col min-w-0">
+              <span class="font-heading font-extrabold text-sm text-text">Trần Văn Quân</span>
+              <span class="text-[10px] uppercase font-bold text-skyBlue tracking-wider mt-1">Khách hàng Phú Quốc</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="w-[360px] md:w-[420px] p-8 glass-strong rounded-[32px] border border-border-light shadow-card flex flex-col gap-6 shrink-0 relative overflow-hidden group hover:-translate-y-2 transition-all duration-300">
+          <div class="absolute top-0 right-0 w-24 h-24 bg-amber-500/5 rounded-bl-full -mr-4 -mt-4 transition-transform group-hover:scale-150 duration-500"></div>
+          <i data-lucide="quote" class="absolute top-8 right-8 w-10 h-10 text-amber-500/10 group-hover:text-amber-500/20 transition-colors"></i>
+          
+          <div class="flex gap-1 text-amber-400">
+            <i data-lucide="star" class="w-4 h-4 fill-current"></i>
+            <i data-lucide="star" class="w-4 h-4 fill-current"></i>
+            <i data-lucide="star" class="w-4 h-4 fill-current"></i>
+            <i data-lucide="star" class="w-4 h-4 fill-current"></i>
+            <i data-lucide="star" class="w-4 h-4 fill-current"></i>
+          </div>
+          <p class="text-text text-sm font-medium leading-relaxed italic relative z-10">"Lần đầu tiên leo đỉnh Fansipan, cảnh sắc mây mờ bao phủ thật sự choáng ngợp! Homestay ở Sapa sạch sẽ, ấm cúng và anh HDV là người bản địa nên hiểu rất rõ về văn hóa."</p>
+          <div class="flex items-center gap-4 mt-auto pt-4 border-t border-border-light relative z-10">
+            <img src="https://images.unsplash.com/photo-1517841905240-472988babdf9?auto=format&fit=crop&w=150&q=80" alt="Avatar" class="w-12 h-12 rounded-full object-cover border-2 border-white shadow-md">
+            <div class="flex flex-col min-w-0">
+              <span class="font-heading font-extrabold text-sm text-text">Lê Tú Anh</span>
+              <span class="text-[10px] uppercase font-bold text-amber-500 tracking-wider mt-1">Khách hàng Sa Pa</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="w-[360px] md:w-[420px] p-8 glass-strong rounded-[32px] border border-border-light shadow-card flex flex-col gap-6 shrink-0 relative overflow-hidden group hover:-translate-y-2 transition-all duration-300">
+          <div class="absolute top-0 right-0 w-24 h-24 bg-coralRose/5 rounded-bl-full -mr-4 -mt-4 transition-transform group-hover:scale-150 duration-500"></div>
+          <i data-lucide="quote" class="absolute top-8 right-8 w-10 h-10 text-coralRose/10 group-hover:text-coralRose/20 transition-colors"></i>
+          
+          <div class="flex gap-1 text-amber-400">
+            <i data-lucide="star" class="w-4 h-4 fill-current"></i>
+            <i data-lucide="star" class="w-4 h-4 fill-current"></i>
+            <i data-lucide="star" class="w-4 h-4 fill-current"></i>
+            <i data-lucide="star" class="w-4 h-4 fill-current"></i>
+            <i data-lucide="star" class="w-4 h-4 fill-current"></i>
+          </div>
+          <p class="text-text text-sm font-medium leading-relaxed italic relative z-10">"Chuyến đi hành trình Di sản Hội An - Đà Nẵng - Huế đã để lại nhiều ấn tượng đẹp. Đồ ăn đặc sản ngon rẻ, xe di chuyển chất lượng cao. Rất đáng tiền!"</p>
+          <div class="flex items-center gap-4 mt-auto pt-4 border-t border-border-light relative z-10">
+            <img src="https://images.unsplash.com/photo-1438761681033-6461ffad8d80?auto=format&fit=crop&w=150&q=80" alt="Avatar" class="w-12 h-12 rounded-full object-cover border-2 border-white shadow-md">
+            <div class="flex flex-col min-w-0">
+              <span class="font-heading font-extrabold text-sm text-text">Hoàng Thị Mai</span>
+              <span class="text-[10px] uppercase font-bold text-coralRose tracking-wider mt-1">Khách hàng Miền Trung</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Duplicated Set for infinite loop -->
+        <div class="w-[360px] md:w-[420px] p-8 glass-strong rounded-[32px] border border-border-light shadow-card flex flex-col gap-6 shrink-0 relative overflow-hidden group hover:-translate-y-2 transition-all duration-300">
+          <div class="absolute top-0 right-0 w-24 h-24 bg-primary/5 rounded-bl-full -mr-4 -mt-4 transition-transform group-hover:scale-150 duration-500"></div>
+          <i data-lucide="quote" class="absolute top-8 right-8 w-10 h-10 text-primary/10 group-hover:text-primary/20 transition-colors"></i>
+          
+          <div class="flex gap-1 text-amber-400">
+            <i data-lucide="star" class="w-4 h-4 fill-current"></i>
+            <i data-lucide="star" class="w-4 h-4 fill-current"></i>
+            <i data-lucide="star" class="w-4 h-4 fill-current"></i>
+            <i data-lucide="star" class="w-4 h-4 fill-current"></i>
+            <i data-lucide="star" class="w-4 h-4 fill-current"></i>
+          </div>
+          <p class="text-text text-sm font-medium leading-relaxed italic relative z-10">"Tour Vịnh Hạ Long 3N2Đ thực sự tuyệt vời! Hướng dẫn viên rất nhiệt tình, thức ăn trên du thuyền siêu ngon. Đặc biệt là trải nghiệm chèo thuyền kayak vào hang động rất đáng nhớ."</p>
+          <div class="flex items-center gap-4 mt-auto pt-4 border-t border-border-light relative z-10">
+            <img src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=150&q=80" alt="Avatar" class="w-12 h-12 rounded-full object-cover border-2 border-white shadow-md">
+            <div class="flex flex-col min-w-0">
+              <span class="font-heading font-extrabold text-sm text-text">Nguyễn Mai Phương</span>
+              <span class="text-[10px] uppercase font-bold text-primary tracking-wider mt-1">Khách hàng Hạ Long</span>
+            </div>
+          </div>
+        </div>
+        
+        <div class="w-[360px] md:w-[420px] p-8 glass-strong rounded-[32px] border border-border-light shadow-card flex flex-col gap-6 shrink-0 relative overflow-hidden group hover:-translate-y-2 transition-all duration-300">
+          <div class="absolute top-0 right-0 w-24 h-24 bg-skyBlue/5 rounded-bl-full -mr-4 -mt-4 transition-transform group-hover:scale-150 duration-500"></div>
+          <i data-lucide="quote" class="absolute top-8 right-8 w-10 h-10 text-skyBlue/10 group-hover:text-skyBlue/20 transition-colors"></i>
+          
+          <div class="flex gap-1 text-amber-400">
+            <i data-lucide="star" class="w-4 h-4 fill-current"></i>
+            <i data-lucide="star" class="w-4 h-4 fill-current"></i>
+            <i data-lucide="star" class="w-4 h-4 fill-current"></i>
+            <i data-lucide="star" class="w-4 h-4 fill-current"></i>
+            <i data-lucide="star" class="w-4 h-4 fill-current"></i>
+          </div>
+          <p class="text-text text-sm font-medium leading-relaxed italic relative z-10">"Tôi và gia đình đã có chuyến nghỉ dưỡng 5 sao ở Phú Quốc vô cùng trọn vẹn nhờ sự sắp xếp chuyên nghiệp của công ty. Vinpearl rất đẹp và các tiện ích miễn phí đều tuyệt vời."</p>
+          <div class="flex items-center gap-4 mt-auto pt-4 border-t border-border-light relative z-10">
+            <img src="https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?auto=format&fit=crop&w=150&q=80" alt="Avatar" class="w-12 h-12 rounded-full object-cover border-2 border-white shadow-md">
+            <div class="flex flex-col min-w-0">
+              <span class="font-heading font-extrabold text-sm text-text">Trần Văn Quân</span>
+              <span class="text-[10px] uppercase font-bold text-skyBlue tracking-wider mt-1">Khách hàng Phú Quốc</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="w-[360px] md:w-[420px] p-8 glass-strong rounded-[32px] border border-border-light shadow-card flex flex-col gap-6 shrink-0 relative overflow-hidden group hover:-translate-y-2 transition-all duration-300">
+          <div class="absolute top-0 right-0 w-24 h-24 bg-amber-500/5 rounded-bl-full -mr-4 -mt-4 transition-transform group-hover:scale-150 duration-500"></div>
+          <i data-lucide="quote" class="absolute top-8 right-8 w-10 h-10 text-amber-500/10 group-hover:text-amber-500/20 transition-colors"></i>
+          
+          <div class="flex gap-1 text-amber-400">
+            <i data-lucide="star" class="w-4 h-4 fill-current"></i>
+            <i data-lucide="star" class="w-4 h-4 fill-current"></i>
+            <i data-lucide="star" class="w-4 h-4 fill-current"></i>
+            <i data-lucide="star" class="w-4 h-4 fill-current"></i>
+            <i data-lucide="star" class="w-4 h-4 fill-current"></i>
+          </div>
+          <p class="text-text text-sm font-medium leading-relaxed italic relative z-10">"Lần đầu tiên leo đỉnh Fansipan, cảnh sắc mây mờ bao phủ thật sự choáng ngợp! Homestay ở Sapa sạch sẽ, ấm cúng và anh HDV là người bản địa nên hiểu rất rõ về văn hóa."</p>
+          <div class="flex items-center gap-4 mt-auto pt-4 border-t border-border-light relative z-10">
+            <img src="https://images.unsplash.com/photo-1517841905240-472988babdf9?auto=format&fit=crop&w=150&q=80" alt="Avatar" class="w-12 h-12 rounded-full object-cover border-2 border-white shadow-md">
+            <div class="flex flex-col min-w-0">
+              <span class="font-heading font-extrabold text-sm text-text">Lê Tú Anh</span>
+              <span class="text-[10px] uppercase font-bold text-amber-500 tracking-wider mt-1">Khách hàng Sa Pa</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="w-[360px] md:w-[420px] p-8 glass-strong rounded-[32px] border border-border-light shadow-card flex flex-col gap-6 shrink-0 relative overflow-hidden group hover:-translate-y-2 transition-all duration-300">
+          <div class="absolute top-0 right-0 w-24 h-24 bg-coralRose/5 rounded-bl-full -mr-4 -mt-4 transition-transform group-hover:scale-150 duration-500"></div>
+          <i data-lucide="quote" class="absolute top-8 right-8 w-10 h-10 text-coralRose/10 group-hover:text-coralRose/20 transition-colors"></i>
+          
+          <div class="flex gap-1 text-amber-400">
+            <i data-lucide="star" class="w-4 h-4 fill-current"></i>
+            <i data-lucide="star" class="w-4 h-4 fill-current"></i>
+            <i data-lucide="star" class="w-4 h-4 fill-current"></i>
+            <i data-lucide="star" class="w-4 h-4 fill-current"></i>
+            <i data-lucide="star" class="w-4 h-4 fill-current"></i>
+          </div>
+          <p class="text-text text-sm font-medium leading-relaxed italic relative z-10">"Chuyến đi hành trình Di sản Hội An - Đà Nẵng - Huế đã để lại nhiều ấn tượng đẹp. Đồ ăn đặc sản ngon rẻ, xe di chuyển chất lượng cao. Rất đáng tiền!"</p>
+          <div class="flex items-center gap-4 mt-auto pt-4 border-t border-border-light relative z-10">
+            <img src="https://images.unsplash.com/photo-1438761681033-6461ffad8d80?auto=format&fit=crop&w=150&q=80" alt="Avatar" class="w-12 h-12 rounded-full object-cover border-2 border-white shadow-md">
+            <div class="flex flex-col min-w-0">
+              <span class="font-heading font-extrabold text-sm text-text">Hoàng Thị Mai</span>
+              <span class="text-[10px] uppercase font-bold text-coralRose tracking-wider mt-1">Khách hàng Miền Trung</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 14. Partner Logo Marquee -->
+  <section class="py-16 bg-bg border-t border-border-light overflow-hidden">
+    <div class="max-w-[1320px] mx-auto px-6 flex flex-col items-center gap-8">
+      <span class="text-[10px] font-bold text-text-light uppercase tracking-widest text-center" data-translate="partners.eyebrow">Đối tác tin cậy</span>
+      <div class="w-full relative overflow-hidden flex">
+        <div class="flex gap-16 items-center animate-marquee shrink-0">
+          <span class="font-heading font-extrabold text-lg text-[#0f3d5f] opacity-60 hover:opacity-100 transition-all duration-300 hover:scale-105 transform cursor-pointer">Vietnam Airlines</span>
+          <span class="font-heading font-extrabold text-lg text-[#d81e26] opacity-60 hover:opacity-100 transition-all duration-300 hover:scale-105 transform cursor-pointer">Vietjet Air</span>
+          <span class="font-heading font-extrabold text-lg text-[#005f3f] opacity-60 hover:opacity-100 transition-all duration-300 hover:scale-105 transform cursor-pointer">Bamboo Airways</span>
+          <span class="font-heading font-extrabold text-lg text-[#b8860b] opacity-60 hover:opacity-100 transition-all duration-300 hover:scale-105 transform cursor-pointer">Vinpearl Resorts</span>
+          <span class="font-heading font-extrabold text-lg text-[#8a6d3b] opacity-60 hover:opacity-100 transition-all duration-300 hover:scale-105 transform cursor-pointer">Mường Thanh</span>
+          <span class="font-heading font-extrabold text-lg text-[#0070c0] opacity-60 hover:opacity-100 transition-all duration-300 hover:scale-105 transform cursor-pointer">Saigontourist</span>
+          <!-- Duplicate for loop -->
+          <span class="font-heading font-extrabold text-lg text-[#0f3d5f] opacity-60 hover:opacity-100 transition-all duration-300 hover:scale-105 transform cursor-pointer">Vietnam Airlines</span>
+          <span class="font-heading font-extrabold text-lg text-[#d81e26] opacity-60 hover:opacity-100 transition-all duration-300 hover:scale-105 transform cursor-pointer">Vietjet Air</span>
+          <span class="font-heading font-extrabold text-lg text-[#005f3f] opacity-60 hover:opacity-100 transition-all duration-300 hover:scale-105 transform cursor-pointer">Bamboo Airways</span>
+          <span class="font-heading font-extrabold text-lg text-[#b8860b] opacity-60 hover:opacity-100 transition-all duration-300 hover:scale-105 transform cursor-pointer">Vinpearl Resorts</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 15. Premium Dark CTA Section -->
+  <section id="cta" class="py-24 bg-bg">
+    <div class="max-w-[1320px] mx-auto px-6">
+      <div class="relative rounded-[40px] overflow-hidden py-24 px-6 md:px-12 text-center flex flex-col items-center gap-6 shadow-hover bg-bg-dark border border-white/5" data-aos="zoom-in">
+        <!-- Glowing Ambient Dots inside Dark CTA -->
+        <div class="absolute -top-32 -right-32 w-96 h-96 bg-primary/10 rounded-full filter blur-[100px] pointer-events-none"></div>
+        <div class="absolute -bottom-32 -left-32 w-80 h-80 bg-accent/5 rounded-full filter blur-[120px] pointer-events-none"></div>
+        
+        <div class="relative z-10 flex flex-col items-center gap-5 max-w-2xl">
+          <span class="text-[9px] uppercase tracking-widest font-bold text-accent bg-primary/20 px-4 py-1.5 rounded-full border border-primary/20" data-translate="cta.eyebrow">Bắt đầu hành trình</span>
+          <h2 class="font-heading text-3xl md:text-[52px] font-extrabold text-white leading-tight" data-translate="cta.title">Sẵn Sàng Khám Phá Việt Nam Cùng Chúng Tôi?</h2>
+          <p class="text-white/60 text-sm md:text-base leading-relaxed" data-translate="cta.subtitle">Đặt tour ngay hôm nay và nhận ưu đãi đặc biệt lên đến 20% cho chuyến đi đầu tiên.</p>
+          <div class="flex flex-wrap items-center justify-center gap-4 mt-6">
+            <button onclick="openBookingModal('Ưu đãi Đặc Biệt 20%', '4500000')" class="ripple-btn px-8 py-3.5 rounded-full bg-primary text-white text-xs font-bold uppercase tracking-widest hover:bg-primary-dark hover:shadow-lg transition-all" data-translate="cta.button.book">Đặt tour ngay</button>
+            <button onclick="openContactModal()" class="ripple-btn px-8 py-3.5 rounded-full bg-transparent text-white border border-white/20 text-xs font-bold uppercase tracking-widest hover:bg-white/10 transition-all" data-translate="cta.button.contact">Tư vấn miễn phí</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Full-Featured Footer -->
+  <footer class="bg-bg-dark text-white pt-24 pb-8 relative overflow-hidden">
+    <!-- Repeating traditional wave motif (Sóng nước Thủy ba) at the top of the footer -->
+    <div class="absolute top-0 left-0 right-0 h-6 opacity-[0.15] pointer-events-none select-none z-10">
+      <svg width="100%" height="24" class="text-amberGold">
+        <pattern id="wavePattern" width="40" height="24" patternUnits="userSpaceOnUse">
+          <path d="M0 24 Q10 12 20 24 Q30 12 40 24 M0 18 Q10 6 20 18 Q30 6 40 18 M-10 24 Q0 12 10 24" fill="none" stroke="currentColor" stroke-width="1.2"/>
+        </pattern>
+        <rect width="100%" height="24" fill="url(#wavePattern)" />
+      </svg>
+    </div>
+
+    <div class="max-w-[1320px] mx-auto px-6 grid grid-cols-1 md:grid-cols-4 gap-12 border-b border-white/10 pb-16 relative z-10">
+      <div class="flex flex-col gap-4 text-left md:col-span-1">
+        <div class="flex items-center gap-3">
+          <div class="w-14 h-14 rounded-full bg-white flex items-center justify-center shadow-md shadow-primary/10 overflow-hidden border-2 border-white/20 select-none">
+            <img src="./logo-school.png" alt="Trường THPT Tam Hiệp Logo" class="w-full h-full object-contain p-0.5" />
+          </div>
+          <div class="flex flex-col text-white">
+            <span class="font-heading font-black text-lg leading-tight tracking-tight uppercase">Trường THPT<br><span class="text-primary-light">Tam Hiệp</span></span>
+            <span class="text-[8px] font-bold tracking-[0.2em] uppercase text-accent mt-1">Dạy tốt - Học tốt</span>
+          </div>
+        </div>
+        <p class="text-white/50 text-sm leading-relaxed" data-translate="footer.about.desc">Đơn vị lữ hành hàng đầu Việt Nam, mang đến các tour du lịch đẳng cấp từ các chuyên gia bản địa giàu kinh nghiệm.</p>
+        
+        <!-- Newsletter Signup -->
+        <div class="mt-4 flex flex-col gap-2.5">
+          <span class="text-[10px] font-bold uppercase tracking-wider text-white/70">Đăng ký nhận bản tin</span>
+          <form onsubmit="handleSubscribe(event)" class="flex gap-2">
+            <input type="email" required placeholder="Email của bạn..." class="px-4 py-2.5 rounded-xl border border-white/10 outline-none text-xs bg-white/5 text-white placeholder-white/30 focus:border-primary flex-grow">
+            <button type="submit" class="px-4 py-2.5 rounded-xl bg-primary text-white text-xs font-bold hover:bg-primary-dark transition-all flex items-center justify-center">
+              <i data-lucide="send" class="w-3.5 h-3.5"></i>
+            </button>
+          </form>
+        </div>
+      </div>
+
+      <div class="flex flex-col gap-4 text-left">
+        <h4 class="font-heading font-bold text-xs uppercase tracking-widest text-white/80" data-translate="footer.destinations.title">Điểm đến</h4>
+        <div class="flex flex-col gap-3 text-white/50 text-sm font-semibold">
+          <a href="#destinations" onclick="switchRegion('north', document.querySelectorAll('.region-tab')[0])" class="hover:text-accent transition-colors">Vịnh Hạ Long</a>
+          <a href="#destinations" onclick="switchRegion('north', document.querySelectorAll('.region-tab')[0])" class="hover:text-accent transition-colors">Sa Pa</a>
+          <a href="#destinations" onclick="switchRegion('central', document.querySelectorAll('.region-tab')[1])" class="hover:text-accent transition-colors">Hội An</a>
+          <a href="#destinations" onclick="switchRegion('south', document.querySelectorAll('.region-tab')[2])" class="hover:text-accent transition-colors">Phú Quốc</a>
+        </div>
+      </div>
+
+      <div class="flex flex-col gap-4 text-left">
+        <h4 class="font-heading font-bold text-xs uppercase tracking-widest text-white/80" data-translate="footer.services.title">Dịch vụ</h4>
+        <div class="flex flex-col gap-3 text-white/50 text-sm font-semibold">
+          <a href="#" class="hover:text-accent transition-colors" data-translate="footer.services.privateTour">Tour riêng</a>
+          <a href="#" class="hover:text-accent transition-colors" data-translate="footer.services.groupTour">Tour nhóm</a>
+          <a href="#" class="hover:text-accent transition-colors" data-translate="footer.services.honeymoon">Tuần trăng mật</a>
+        </div>
+      </div>
+
+      <div class="flex flex-col gap-4 text-left">
+        <h4 class="font-heading font-bold text-xs uppercase tracking-widest text-white/80" data-translate="footer.contact.title">Liên hệ</h4>
+        <div class="flex flex-col gap-3 text-white/50 text-sm font-semibold">
+          <span class="flex items-start gap-2.5"><i data-lucide="map-pin" class="w-4 h-4 text-primary shrink-0 mt-0.5"></i> <span data-translate="footer.contact.address">123 Nguyễn Huệ, Quận 1, TP. Hồ Chí Minh</span></span>
+          <span class="flex items-center gap-2.5"><i data-lucide="phone" class="w-4 h-4 text-primary shrink-0"></i> 1900 xxxx</span>
+          <span class="flex items-center gap-2.5"><i data-lucide="mail" class="w-4 h-4 text-primary shrink-0"></i> info@vietnamtours.vn</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="max-w-[1320px] mx-auto px-6 py-6 flex flex-col md:flex-row items-center justify-between text-xs text-white/40 gap-4 mt-6">
+      <span data-translate="footer.copyright">© 2024 Vietnam Tours. Tất cả quyền được bảo lưu.</span>
+      <div class="flex gap-6 font-semibold">
+        <a href="#" class="hover:text-white/70 transition-colors">Privacy Policy</a>
+        <a href="#" class="hover:text-white/70 transition-colors">Terms of Service</a>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Floating AI Chat Assistant Widget -->
+  <div class="fixed bottom-6 right-6 z-40 flex flex-col items-end gap-4">
+    <!-- Chat Window Container -->
+    <div id="ai-chat-window" class="glass-strong rounded-[28px] w-[360px] md:w-[400px] h-[500px] shadow-hover border border-white/60 flex flex-col overflow-hidden opacity-0 pointer-events-none translate-y-4 transition-all duration-300">
+      <!-- Header -->
+      <div class="bg-primary px-6 py-4.5 text-white flex items-center justify-between shadow-sm">
+        <div class="flex items-center gap-3">
+          <div class="w-10 h-10 rounded-full bg-white/10 flex items-center justify-center border border-white/15 relative">
+            <i data-lucide="sparkles" class="w-5.5 h-5.5 text-accent animate-pulse"></i>
+            <span class="absolute bottom-0 right-0 w-2.5 h-2.5 bg-emerald-400 rounded-full border border-primary"></span>
+          </div>
+          <div class="flex flex-col text-left">
+            <span class="font-heading font-extrabold text-sm leading-none">Trợ lý Du lịch AI</span>
+            <span class="text-[9px] font-semibold text-white/70 uppercase tracking-widest mt-1">Tư vấn trực tuyến</span>
+          </div>
+        </div>
+        <button onclick="toggleAiChat()" class="p-1.5 rounded-full hover:bg-white/10 text-white transition-colors">
+          <i data-lucide="x" class="w-5 h-5"></i>
+        </button>
+      </div>
+
+      <!-- Messages Area -->
+      <div id="ai-chat-messages" class="flex-grow p-5 overflow-y-auto flex flex-col gap-4 text-xs font-semibold bg-bg-alt/30">
+        <!-- Initial Welcome Message -->
+        <div class="flex items-start gap-2.5 max-w-[85%] self-start">
+          <div class="w-8 h-8 rounded-full bg-[#E8F5E9] text-primary flex items-center justify-center shrink-0 border border-primary/10">
+            <i data-lucide="sparkles" class="w-4.5 h-4.5"></i>
+          </div>
+          <div class="bg-white px-4 py-3 rounded-2xl rounded-tl-none shadow-card text-text border border-border-light text-left font-medium leading-relaxed">
+            Xin chào! Tôi là Trợ lý Du lịch AI của Vietnam Tours. Tôi có thể tư vấn các điểm đến, tour hot hoặc combo đặc sắc cho kỳ nghỉ của bạn. Hãy gửi tin nhắn cho tôi nhé!
+          </div>
+        </div>
+      </div>
+
+      <!-- Suggestion Quick Replies -->
+      <div class="px-5 pb-2 flex flex-wrap gap-2 justify-start">
+        <button onclick="sendQuickReply('Tư vấn tour Vịnh Hạ Long')" class="px-3 py-1.5 rounded-full bg-white border border-border-light text-[10px] text-text-secondary hover:border-primary hover:text-primary transition-all shadow-card font-bold">Tour Hạ Long 3N2Đ</button>
+        <button onclick="sendQuickReply('Gợi ý tour Sa Pa Fansipan')" class="px-3 py-1.5 rounded-full bg-white border border-border-light text-[10px] text-text-secondary hover:border-primary hover:text-primary transition-all shadow-card font-bold">Trekking Sa Pa</button>
+        <button onclick="sendQuickReply('Combo Vinpearl Phú Quốc có gì hot?')" class="px-3 py-1.5 rounded-full bg-white border border-border-light text-[10px] text-text-secondary hover:border-primary hover:text-primary transition-all shadow-card font-bold">Combo Phú Quốc</button>
+      </div>
+
+      <!-- Input Bar -->
+      <form onsubmit="handleAiChatSend(event)" class="p-3 border-t border-border-light bg-white flex items-center gap-2">
+        <input type="text" id="ai-chat-input" placeholder="Hỏi tôi bất cứ điều gì về du lịch..." class="flex-grow px-4 py-3 rounded-2xl border border-border-light focus:border-primary outline-none text-xs font-semibold bg-bg/50">
+        <button type="submit" class="w-10 h-10 rounded-2xl bg-primary text-white flex items-center justify-center hover:bg-primary-dark transition-colors shadow-md shadow-primary/20 shrink-0">
+          <i data-lucide="send" class="w-4 h-4"></i>
+        </button>
+      </form>
+    </div>
+
+    <!-- Floating Circular Button -->
+    <button onclick="toggleAiChat()" class="w-14 h-14 rounded-full bg-primary hover:bg-primary-dark text-white flex items-center justify-center shadow-glow transition-all duration-300 hover:-translate-y-1 relative group">
+      <div class="absolute inset-0 rounded-full bg-primary/25 animate-ping opacity-75"></div>
+      <i data-lucide="message-square" class="w-6 h-6 absolute group-hover:scale-0 transition-transform duration-300"></i>
+      <i data-lucide="sparkles" class="w-6 h-6 scale-0 group-hover:scale-100 transition-transform duration-300 text-accent"></i>
+    </button>
+  </div>
+
+  <!-- Modals Container (Functional Interactivity) -->
+  
+  <!-- 1. Auth Modal (Login/Register) -->
+  <div id="auth-modal" class="fixed inset-0 z-50 flex items-center justify-center bg-black/60 opacity-0 pointer-events-none transition-all duration-300">
+    <div class="glass-strong rounded-[32px] p-8 md:p-10 max-w-md w-full mx-4 shadow-hover relative transform scale-95 transition-all duration-300" id="auth-modal-content">
+      <button onclick="closeAuthModal()" class="absolute top-6 right-6 text-text hover:text-primary transition-colors">
+        <i data-lucide="x" class="w-6 h-6"></i>
+      </button>
+      <div class="flex gap-4 border-b border-border-light pb-4 mb-6">
+        <button onclick="switchAuthTab('login')" id="tab-login" class="text-lg font-heading font-extrabold text-primary border-b-2 border-primary pb-2">Đăng nhập</button>
+        <button onclick="switchAuthTab('register')" id="tab-register" class="text-lg font-heading font-extrabold text-text-secondary hover:text-primary pb-2">Đăng ký</button>
+      </div>
+      <form id="auth-form" onsubmit="handleAuthSubmit(event)" class="flex flex-col gap-4 text-left">
+        <div id="auth-name-field" class="hidden flex flex-col gap-1.5">
+          <label class="text-xs font-bold text-text-secondary uppercase">Họ và tên</label>
+          <input type="text" id="auth-name" placeholder="Nguyễn Văn A" class="px-4 py-3 rounded-2xl border border-border-light focus:border-primary outline-none text-sm bg-bg/50">
+        </div>
+        <div class="flex flex-col gap-1.5">
+          <label class="text-xs font-bold text-text-secondary uppercase">Email</label>
+          <input type="email" id="auth-email" required placeholder="example@email.com" class="px-4 py-3 rounded-2xl border border-border-light focus:border-primary outline-none text-sm bg-bg/50">
+        </div>
+        <div class="flex flex-col gap-1.5">
+          <label class="text-xs font-bold text-text-secondary uppercase">Mật khẩu</label>
+          <input type="password" id="auth-pass" required placeholder="••••••••" class="px-4 py-3 rounded-2xl border border-border-light focus:border-primary outline-none text-sm bg-bg/50">
+        </div>
+        <button type="submit" class="w-full py-3.5 mt-2 rounded-full bg-primary text-white font-heading font-bold text-sm uppercase tracking-wider hover:bg-primary-dark transition-colors shadow-md shadow-primary/20">Xác nhận</button>
+      </form>
+    </div>
+  </div>
+
+  <!-- 2. Booking Modal -->
+  <div id="booking-modal" class="fixed inset-0 z-50 flex items-center justify-center bg-black/60 opacity-0 pointer-events-none transition-all duration-300">
+    <div class="glass-strong rounded-[32px] p-8 md:p-10 max-w-lg w-full mx-4 shadow-hover relative transform scale-95 transition-all duration-300" id="booking-modal-content">
+      <button onclick="closeBookingModal()" class="absolute top-6 right-6 text-text hover:text-primary transition-colors">
+        <i data-lucide="x" class="w-6 h-6"></i>
+      </button>
+      <div class="text-left flex flex-col gap-2 mb-6">
+        <span class="text-[10px] uppercase font-bold tracking-widest text-primary font-heading">Yêu cầu đặt tour</span>
+        <h3 id="booking-tour-name" class="font-heading font-extrabold text-2xl text-text leading-tight">Tên Tour</h3>
+      </div>
+      <form onsubmit="handleBookingSubmit(event)" class="flex flex-col gap-4 text-left">
+        <div class="grid grid-cols-2 gap-4">
+          <div class="flex flex-col gap-1.5">
+            <label class="text-xs font-bold text-text-secondary uppercase">Họ và tên</label>
+            <input type="text" required placeholder="Nguyễn Văn A" class="px-4 py-3 rounded-2xl border border-border-light focus:border-primary outline-none text-sm bg-bg/50">
+          </div>
+          <div class="flex flex-col gap-1.5">
+            <label class="text-xs font-bold text-text-secondary uppercase">Số điện thoại</label>
+            <input type="tel" required placeholder="0901234567" class="px-4 py-3 rounded-2xl border border-border-light focus:border-primary outline-none text-sm bg-bg/50">
+          </div>
+        </div>
+        <div class="grid grid-cols-2 gap-4">
+          <div class="flex flex-col gap-1.5">
+            <label class="text-xs font-bold text-text-secondary uppercase">Ngày khởi hành</label>
+            <input type="date" required class="px-4 py-3 rounded-2xl border border-border-light focus:border-primary outline-none text-sm bg-bg/50">
+          </div>
+          <div class="flex flex-col gap-1.5">
+            <label class="text-xs font-bold text-text-secondary uppercase">Số lượng khách</label>
+            <div class="flex items-center border border-border-light rounded-2xl bg-bg/50">
+              <button type="button" onclick="changeGuests(-1)" class="w-12 py-3 text-text-secondary hover:text-primary transition-colors font-bold text-lg">-</button>
+              <span id="booking-guests" class="flex-grow text-center font-bold text-sm">1</span>
+              <button type="button" onclick="changeGuests(1)" class="w-12 py-3 text-text-secondary hover:text-primary transition-colors font-bold text-lg">+</button>
+            </div>
+          </div>
+        </div>
+        <!-- Price Display -->
+        <div class="bg-primary/5 border border-primary/10 rounded-2xl p-4 flex items-center justify-between mt-2">
+          <span class="text-xs font-bold text-text-secondary uppercase">Tổng giá trị tạm tính</span>
+          <span id="booking-total-price" class="font-heading font-extrabold text-xl text-primary">0đ</span>
+        </div>
+        <button type="submit" class="w-full py-4 rounded-full bg-primary text-white font-heading font-bold text-sm uppercase tracking-wider hover:bg-primary-dark transition-colors shadow-md shadow-primary/20">Xác nhận đặt tour</button>
+      </form>
+    </div>
+  </div>
+
+  <!-- 2.5 Contact / Consulting Modal -->
+  <div id="contact-modal" class="fixed inset-0 z-50 flex items-center justify-center bg-black/60 opacity-0 pointer-events-none transition-all duration-300">
+    <div class="glass-strong rounded-[32px] p-8 md:p-10 max-w-md w-full mx-4 shadow-hover relative transform scale-95 transition-all duration-300" id="contact-modal-content">
+      <button onclick="closeContactModal()" class="absolute top-6 right-6 text-text hover:text-primary transition-colors">
+        <i data-lucide="x" class="w-6 h-6"></i>
+      </button>
+      <div class="text-left flex flex-col gap-2 mb-6">
+        <span class="text-[10px] uppercase font-bold tracking-widest text-primary font-heading">Yêu cầu tư vấn</span>
+        <h3 class="font-heading font-extrabold text-2xl text-text leading-tight">Nhận Tư Vấn Miễn Phí</h3>
+        <p class="text-xs text-text-secondary">Để lại thông tin, đội ngũ chuyên gia của chúng tôi sẽ thiết kế lịch trình tour riêng biệt cho bạn.</p>
+      </div>
+      <form onsubmit="handleContactSubmit(event)" class="flex flex-col gap-4 text-left">
+        <div class="flex flex-col gap-1.5">
+          <label class="text-xs font-bold text-text-secondary uppercase">Họ và tên</label>
+          <input type="text" required placeholder="Nguyễn Văn A" class="px-4 py-3 rounded-2xl border border-border-light focus:border-primary outline-none text-sm bg-bg/50">
+        </div>
+        <div class="flex flex-col gap-1.5">
+          <label class="text-xs font-bold text-text-secondary uppercase">Số điện thoại</label>
+          <input type="tel" required placeholder="0901234567" class="px-4 py-3 rounded-2xl border border-border-light focus:border-primary outline-none text-sm bg-bg/50">
+        </div>
+        <div class="flex flex-col gap-1.5">
+          <label class="text-xs font-bold text-text-secondary uppercase">Điểm đến quan tâm</label>
+          <input type="text" placeholder="Ví dụ: Hạ Long, Sapa, Phú Quốc..." class="px-4 py-3 rounded-2xl border border-border-light focus:border-primary outline-none text-sm bg-bg/50">
+        </div>
+        <div class="flex flex-col gap-1.5">
+          <label class="text-xs font-bold text-text-secondary uppercase">Lời nhắn / Yêu cầu riêng</label>
+          <textarea rows="3" placeholder="Ghi chú thêm thông tin (Số khách dự kiến, thời gian đi...)" class="px-4 py-3 rounded-2xl border border-border-light focus:border-primary outline-none text-sm bg-bg/50 resize-none"></textarea>
+        </div>
+        <button type="submit" class="w-full py-3.5 mt-2 rounded-full bg-primary text-white font-heading font-bold text-sm uppercase tracking-wider hover:bg-primary-dark transition-colors shadow-md shadow-primary/20">Gửi yêu cầu tư vấn</button>
+      </form>
+    </div>
+  </div>
+
+  <!-- 3. Blog Read More Modal -->
+  <div id="blog-modal" class="fixed inset-0 z-50 flex items-center justify-center bg-black/60 opacity-0 pointer-events-none transition-all duration-300">
+    <div class="glass-strong rounded-[32px] p-8 md:p-10 max-w-2xl w-full mx-4 shadow-hover relative max-h-[85vh] overflow-y-auto transform scale-95 transition-all duration-300" id="blog-modal-content">
+      <button onclick="closeBlogModal()" class="absolute top-6 right-6 text-text hover:text-primary transition-colors">
+        <i data-lucide="x" class="w-6 h-6"></i>
+      </button>
+      <div class="text-left flex flex-col gap-4">
+        <span id="blog-modal-category" class="px-3.5 py-1.5 rounded-full bg-primary/10 text-primary text-xs font-bold uppercase tracking-wider self-start font-heading">Danh mục</span>
+        <span id="blog-modal-date" class="text-xs text-text-secondary font-semibold">Ngày đăng</span>
+        <h3 id="blog-modal-title" class="font-heading font-extrabold text-2xl md:text-3xl text-text leading-tight">Tiêu đề bài viết</h3>
+        <div class="w-full h-64 rounded-2xl overflow-hidden mt-2">
+          <img id="blog-modal-img" src="" alt="Blog Cover" class="w-full h-full object-cover">
+        </div>
+        <div id="blog-modal-body" class="text-text-secondary text-sm leading-relaxed mt-4 flex flex-col gap-4 font-body">
+          <!-- Main Content -->
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
