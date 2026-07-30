@@ -9,21 +9,25 @@ function safeCreateIcons() {
   }
 }
 
-// Initialize Lucide Icons
-safeCreateIcons();
+// Initialize Lucide Icons and AOS when DOM is ready and window is fully loaded
+window.addEventListener('DOMContentLoaded', () => {
+  safeCreateIcons();
+});
 
-// Initialize AOS (Scroll Animations)
-try {
-  if (typeof AOS !== 'undefined') {
-    AOS.init({
-      once: true,
-      offset: 80,
-      duration: 800
-    });
+window.addEventListener('load', () => {
+  safeCreateIcons();
+  try {
+    if (typeof AOS !== 'undefined') {
+      AOS.init({
+        once: true,
+        offset: 80,
+        duration: 800
+      });
+    }
+  } catch (e) {
+    console.warn("AOS failed to initialize:", e);
   }
-} catch (e) {
-  console.warn("AOS failed to initialize:", e);
-}
+});
 
 // Language system dictionary
 const dictionary = {
