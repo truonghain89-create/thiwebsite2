@@ -3,20 +3,18 @@
 import React, { use } from "react";
 import { Language } from "@/context/AppContext";
 import { HeroSection } from "@/components/sections/HeroSection";
-import { CategoriesSection } from "@/components/sections/CategoriesSection";
+import { CategoriesSection, LotusDivider } from "@/components/sections/CategoriesSection";
 import { DestinationsSection } from "@/components/sections/DestinationsSection";
-import { FeaturedToursSection } from "@/components/sections/FeaturedToursSection";
-import { RegionalToursSection } from "@/components/sections/RegionalToursSection";
-import { SeasonalToursSection } from "@/components/sections/SeasonalToursSection";
+import { ToursSection } from "@/components/sections/ToursSection";
+import { SeasonalSection } from "@/components/sections/SeasonalSection";
 import { ComboSection } from "@/components/sections/ComboSection";
 import { ExperiencesSection } from "@/components/sections/ExperiencesSection";
-import { WhyChooseUsSection } from "@/components/sections/WhyChooseUsSection";
-import { BookingProcessSection } from "@/components/sections/BookingProcessSection";
 import { StatsSection } from "@/components/sections/StatsSection";
 import { TestimonialsSection } from "@/components/sections/TestimonialsSection";
 import { BlogSection } from "@/components/sections/BlogSection";
-import { PartnersSection } from "@/components/sections/PartnersSection";
 import { CTASection } from "@/components/sections/CTASection";
+import { WhyChooseUsSection } from "@/components/sections/WhyChooseUsSection";
+import { BookingProcessSection } from "@/components/sections/BookingProcessSection";
 
 interface PageProps {
   params: Promise<{ lang: string }>;
@@ -28,49 +26,45 @@ export default function HomePage({ params }: PageProps) {
 
   return (
     <div className="flex flex-col min-h-screen">
-      {/* 1. Hero Section */}
+      {/* 1. Hero */}
       <HeroSection />
 
-      {/* 2. Categories Section */}
+      {/* 2. Categories */}
       <CategoriesSection />
+      <LotusDivider />
 
-      {/* 3. Destinations Section */}
+      {/* 3. Destinations */}
       <DestinationsSection />
+      <LotusDivider />
 
-      {/* 4. Featured Tours Section */}
-      <FeaturedToursSection />
+      {/* 4. Tours with region filter */}
+      <ToursSection />
 
-      {/* 5. Regional Tours Section */}
-      <RegionalToursSection />
-
-      {/* 6. Seasonal Tours Section */}
-      <SeasonalToursSection />
-
-      {/* 7. Combo Section */}
-      <ComboSection />
-
-      {/* 8. Experiences Section */}
-      <ExperiencesSection />
-
-      {/* 9. Why Choose Us Section */}
+      {/* 5. Why Choose Us */}
       <WhyChooseUsSection />
 
-      {/* 10. Booking Process Section */}
+      {/* 6. Booking Process */}
       <BookingProcessSection />
 
-      {/* 11. Stats Section */}
+      {/* 7. Seasonal */}
+      <SeasonalSection />
+
+      {/* 8. Combo */}
+      <ComboSection />
+
+      {/* 9. Experiences */}
+      <ExperiencesSection />
+
+      {/* 10. Stats */}
       <StatsSection />
 
-      {/* 12. Testimonials Section */}
-      <TestimonialsSection />
-
-      {/* 13. Blog Section */}
+      {/* 11. Blog */}
       <BlogSection />
 
-      {/* 14. Partners Section */}
-      <PartnersSection />
+      {/* 12. Testimonials */}
+      <TestimonialsSection />
 
-      {/* 15. CTA Section */}
+      {/* 13. CTA */}
       <CTASection />
     </div>
   );

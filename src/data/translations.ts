@@ -55,6 +55,10 @@ const translations: Translations = {
     vi: "Lựa chọn trải nghiệm du lịch phù hợp với sở thích và phong cách riêng của bạn.",
     en: "Choose travel experiences that match your unique interests and style."
   },
+  "cat.beach": { vi: "Biển đảo", en: "Beach & Island" },
+  "cat.mountain": { vi: "Núi rừng", en: "Mountains" },
+  "cat.heritage": { vi: "Di sản văn hóa", en: "Heritage" },
+  "cat.cuisine": { vi: "Ẩm thực", en: "Cuisine" },
 
   // ── Destinations Section ──
   "destinations.eyebrow": { vi: "Điểm đến nổi bật", en: "Featured Destinations" },
@@ -62,6 +66,14 @@ const translations: Translations = {
   "destinations.subtitle": {
     vi: "Từ Bắc vào Nam, mỗi vùng đất là một câu chuyện, một trải nghiệm khác biệt đang chờ bạn.",
     en: "From North to South, each region tells a unique story, offering distinct experiences awaiting you."
+  },
+  "dest.halong.desc": {
+    vi: "Di sản thiên nhiên thế giới với hàng nghìn đảo đá vôi, hang động kỳ vĩ giữa làn nước xanh ngọc bích.",
+    en: "World natural heritage with thousands of limestone islets and caves inside emerald seawater."
+  },
+  "dest.sapa.desc": {
+    vi: "Ruộng bậc thang trải dài giữa núi rừng Tây Bắc, nơi sinh sống của các dân tộc thiểu số với văn hóa đặc sắc.",
+    en: "Majestic rice terraced fields and rich cultural experiences with ethnic minority groups."
   },
 
   // ── Featured Tours ──
