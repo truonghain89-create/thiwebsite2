@@ -49,22 +49,11 @@ export function ScrollAnimator({
   className = "",
   once = true,
 }: ScrollAnimatorProps) {
-  const [isMounted, setIsMounted] = useState(false);
-
-  useEffect(() => {
-    setIsMounted(true);
-  }, []);
-
-  // On SSR / first paint → show content immediately (no invisible flash)
-  if (!isMounted) {
-    return <div className={className}>{children}</div>;
-  }
-
   const variant = animations[animation];
 
   return (
     <motion.div
-      initial="hidden"
+      initial="visible"
       whileInView="visible"
       viewport={{ once, margin: "0px" }}
       variants={{
@@ -85,7 +74,6 @@ export function ScrollAnimator({
   );
 }
 
-// Stagger container for child animations
 export function StaggerContainer({
   children,
   className = "",
@@ -95,19 +83,9 @@ export function StaggerContainer({
   className?: string;
   staggerDelay?: number;
 }) {
-  const [isMounted, setIsMounted] = useState(false);
-
-  useEffect(() => {
-    setIsMounted(true);
-  }, []);
-
-  if (!isMounted) {
-    return <div className={className}>{children}</div>;
-  }
-
   return (
     <motion.div
-      initial="hidden"
+      initial="visible"
       whileInView="visible"
       viewport={{ once: true, margin: "0px" }}
       variants={{

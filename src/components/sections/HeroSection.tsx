@@ -21,6 +21,11 @@ export function HeroSection() {
   const { t, lang } = useApp();
   const [currentSlide, setCurrentSlide] = useState(0);
   const [scrollY, setScrollY] = useState(0);
+  const [isMounted, setIsMounted] = useState(false);
+
+  useEffect(() => {
+    setIsMounted(true);
+  }, []);
 
   // Auto slide
   const nextSlide = useCallback(() => {
@@ -48,23 +53,33 @@ export function HeroSection() {
   return (
     <section className="relative min-h-screen w-full flex flex-col justify-center overflow-hidden" id="hero">
       {/* Background Slides */}
-      <AnimatePresence mode="wait">
-        <motion.div
-          key={currentSlide}
-          initial={{ opacity: 0, scale: 1.1 }}
-          animate={{ opacity: 1, scale: 1 }}
-          exit={{ opacity: 0 }}
-          transition={{ duration: 1.2, ease: "easeInOut" }}
-          className="absolute inset-0 z-0"
-        >
+      {isMounted ? (
+        <AnimatePresence mode="wait">
+          <motion.div
+            key={currentSlide}
+            initial={{ opacity: 0, scale: 1.1 }}
+            animate={{ opacity: 1, scale: 1 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: 1.2, ease: "easeInOut" }}
+            className="absolute inset-0 z-0"
+          >
+            <img
+              src={heroSlides[currentSlide].image}
+              alt={heroSlides[currentSlide].title[lang]}
+              className="w-full h-full object-cover"
+              style={{ transform: `translateY(${scrollY * 0.3}px) scale(1.05)` }}
+            />
+          </motion.div>
+        </AnimatePresence>
+      ) : (
+        <div className="absolute inset-0 z-0">
           <img
             src={heroSlides[currentSlide].image}
             alt={heroSlides[currentSlide].title[lang]}
             className="w-full h-full object-cover"
-            style={{ transform: `translateY(${scrollY * 0.3}px) scale(1.05)` }}
           />
-        </motion.div>
-      </AnimatePresence>
+        </div>
+      )}
 
       {/* Overlay */}
       <div className="absolute inset-0 z-[1] bg-gradient-to-b from-black/50 via-black/25 to-black/60" />
@@ -75,12 +90,13 @@ export function HeroSection() {
       {/* Content */}
       <div className="container-main relative z-10 pt-32 pb-12 flex flex-col gap-8">
         {/* Main Content - Left aligned */}
-        <motion.div
-          initial={{ opacity: 0, y: 40 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, delay: 0.2 }}
-          className="max-w-2xl flex flex-col gap-6"
-        >
+        {isMounted ? (
+          <motion.div
+            initial={{ opacity: 0, y: 40 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8, delay: 0.2 }}
+            className="max-w-2xl flex flex-col gap-6"
+          >
           {/* Eyebrow */}
           <motion.div
             initial={{ opacity: 0, x: -20 }}
@@ -145,7 +161,37 @@ export function HeroSection() {
               </div>
             ))}
           </motion.div>
-        </motion.div>
+        ) : (
+          <div className="max-w-2xl flex flex-col gap-6">
+            <div className="inline-flex items-center gap-2 self-start">
+              <span className="px-4 py-1.5 rounded-full bg-white/15 backdrop-blur-sm border border-white/10 text-white/90 text-xs font-bold tracking-wide">
+                {t("hero.eyebrow")}
+              </span>
+            </div>
+            <h1 className="font-heading text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-extrabold text-white leading-[1.08] tracking-tight whitespace-pre-line">
+              {t("hero.title")}
+            </h1>
+            <p className="text-white/80 text-base md:text-lg leading-relaxed max-w-xl font-body">
+              {t("hero.subtitle")}
+            </p>
+            <div className="flex flex-wrap items-center gap-4">
+              <RippleButton variant="primary" size="lg">
+                {t("hero.cta.explore")}
+              </RippleButton>
+              <RippleButton variant="white" size="lg">
+                {t("hero.cta.tours")}
+              </RippleButton>
+            </div>
+            <div className="flex flex-wrap items-center gap-4 pt-2">
+              {badges.map((badge, i) => (
+                <div key={i} className="flex items-center gap-2 px-4 py-2 rounded-full bg-white/10 backdrop-blur-sm border border-white/10">
+                  <badge.icon className="w-4 h-4 text-accent" />
+                  <span className="text-white text-xs font-bold">{badge.text}</span>
+                </div>
+              ))}
+            </div>
+          </div>
+        )}
 
         {/* Slide Indicators */}
         <motion.div
